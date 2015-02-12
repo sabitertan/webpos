@@ -8,6 +8,7 @@ class ModelTotalWebposTotal extends Model {
 		$bank_array=explode('_',$this->session->data['instalment']);
 		$instalment_array=explode('x',$bank_array[1]);
 		$instalment=intval($instalment_array[0]);
+		$instalment_array[1]= str_replace(',','',$instalment_array[1]);
 		$price=floatval(substr($instalment_array[1],0,-2));
 		$ratio=floatval($this->config->get('webpostotal_single_ratio'));
 		if($instalment!=0){
