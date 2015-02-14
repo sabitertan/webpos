@@ -23,13 +23,14 @@ class ModelTotalWebposTotal extends Model {
 			//$webpos_total=$price+($price*$ratio/100);
 			$webpos_total=$price;
 		}
-	}
 		$total+=$webpos_total-$total;
-		$total_data[] = array(
+			$total_data[] = array(
 			'code'       => 'webpostotal',
 			'title'      => $webpos_title,
 			'value'      => $webpos_total,
 			'sort_order' => $this->config->get('webpostotal_sort_order')
 		);
+	}
+
 	}
 }
