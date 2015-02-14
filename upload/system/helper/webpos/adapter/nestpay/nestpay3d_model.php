@@ -82,7 +82,7 @@ class nestpay3DModel {
 		
 		if($hashparam != $hash) {
 			$response['message']=$bank_response['mdErrorMsg'] .'<h4>Güvenlik Uyarısı. Sayısal İmza Geçersiz !</h4>' ;
-			$response['result']=0; "";
+			$response['result']=0;
 		} else {
 			$mdStatus=$bank_response['mdStatus'];// if mdStatus 1,2,3,4 then 3D authentication is successful, if mdStatus 5,6,7,8,9,0 then 3D authentication is FAILED
 			$mdArray=array('1','2','3','4');
