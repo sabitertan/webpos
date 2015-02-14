@@ -42,6 +42,9 @@ class ControllerPaymentWebpos extends Controller {
 		$bank_id=$this->session->data['webpos_bank_id'];
 		$bank=$this->getbank($bank_id);
 		$data['payment_model']=$bank['model'];
+		if($bank['method']=="posnet" && $bank['model']=="classic") {
+		$data['payment_model']="3d_Hosting";
+		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/webpos.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/payment/webpos.tpl', $data);
