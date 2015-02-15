@@ -1,5 +1,5 @@
 <?php
-class gvp3dPay {
+class gvpHosting {
 	private function createHash($terminal_id,$oid,$amount,$okUrl,$failUrl,$type,$instalment,$storekey,$provaut_password) {
 		$secData=strtoupper(sha1($provaut_password."0".$terminal_id));
 		$hashstr = $terminal_id . $oid . $amount . $okUrl . $failUrl . $type . $instalment . $storekey . $secData;
@@ -14,22 +14,19 @@ class gvp3dPay {
 			$instalment="";
 		}
 		$hash=$this->createHash($bank['gvp_terminal_id'],$bank['order_id'],$bank['total'],$bank['success_url'],$bank['fail_url'],"sales",$instalment,$bank['gvp_3D_storekey'],$bank['gvp_provaut_password']);
-		
+		$txntimestamp=microtime();
 		$inputs=array();
-		$inputs=array('secure3dsecuritylevel'=>"3D_PAY", //3D_PAY,3D_FULL,3D_HALF @TODO: should create a variable for this
-		'cardnumber'=>$bank['cc_number'],
-		'cardexpiredatemonth'=>$bank['cc_expire_date_month'],
-		'cardexpiredateyear'=>$bank['cc_expire_date_year'],
-		'cardcvv2'=>$bank['cc_cvv2'],
+		$inputs=array('secure3dsecuritylevel'=>"OOS_PAY",
 		'mode'=>"PROD",
 		'apiversion'=>"v0.01",
-		'terminalprovuserid'=>"PROVAUT",
+		'terminalprovuserid'=>"PROVOOS",
 		'terminaluserid'=>$bank['gvp_user_name'],
 		'terminalmerchantid'=>$bank['gvp_merchant_id'],
 		'txntype'=>"sales",
 		'txnamount'=>$bank['total'],
 		'txncurrencycode'=>"949",
 		'txninstallmentcount'=>$instalment,
+		'txntimestamp'=>$txntimestamp,
 		'orderid'=>$bank['order_id'],
 		'terminalid'=>$bank['gvp_terminal_id'],
 		'successurl'=>$bank['success_url'],
@@ -37,6 +34,9 @@ class gvp3dPay {
 		'customeripaddress'=>$bank['customer_ip'],
 		'customeremailaddress'=>"",
 		'secure3dhash'=>$hash,
+		'refreshtime'=>"10",
+		'companyname'=>$bank['gvp_3D_storename'],
+		'lang'=>"tr",
 		'bank_id'=>$bank['bank_id'],
 		'oid'=>$bank['order_id']
 		);
@@ -69,15 +69,6 @@ class gvp3dPay {
 		$response=array();
 		$response['message']='';
 		
-		
-			$mdStatus=$bank_response['mdstatus'];// if mdstatus 1,2,3,4 then 3D authentication is successful, if mdstatus 5,6,7,8,9,0 then 3D authentication is FAILED
-			if ($bank_response['secure3dsecuritylevel']==="3D_FULL") {
-				$mdArray=array('1');
-			} else {
-				$mdArray=array('1','2','3','4');
-			}
-			if (in_array($mdStatus,$mdArray)){
-				$response['message'].='3D Onayı Başarılı.<br/>';
 				$ProcReturnCode=$bank_response['procreturncode'];
 				$Response=$bank_response['response'];
 				
@@ -93,12 +84,7 @@ class gvp3dPay {
 					$response['message'].='ErrMsg : '.$bank_response['errmsg'].'<br/>';
 				}
 			
-			} else {
-				$response['result']=0;
-				$response['message'].='3D doğrulama başarısız<br/>';
-				$response['message'].=$bank_response['mderrormessage'];
-				
-			}
+
 		
 		//print_r($response);
 		return $response;
