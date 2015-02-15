@@ -36,6 +36,8 @@ class posnet3DModel {
 			'lang'=>"tr",
 			'url'=>"",
 			'openANewWindow'=>"0",
+			'bank_id'=>$bank['bank_id'],
+			'oid'=>$bank['order_id'],
 			'useJokerVadaa'=>"1");
 			$action='';
 			if ($bank['mode']=='live') {

@@ -36,6 +36,8 @@ class posnet3DHosting {
 			'lang'=>"tr",
 			'url'=>"",
 			'openANewWindow'=>"0",
+			'bank_id'=>$bank['bank_id'],
+			'oid'=>$bank['order_id'],
 			'useJokerVadaa'=>"1");//optional can set to "0" or remove totally
 			$action='';
 			if ($bank['mode']=='live') {

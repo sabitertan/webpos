@@ -29,6 +29,8 @@ class posnetHosting {
 			'merchantReturnSuccessURL'=>$bank['success_url'],
 			'merchantReturnFailURL'=>$bank['fail_url'],
 			'openANewWindow'=>"0",
+			'bank_id'=>$bank['bank_id'],
+			'oid'=>$bank['order_id'],
 			'useJokerVadaa'=>"1");
 			$action='';
 			if ($bank['mode']=='live') {

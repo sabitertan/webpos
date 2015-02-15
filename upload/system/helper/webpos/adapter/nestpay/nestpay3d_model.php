@@ -200,7 +200,7 @@ class nestpay3DModel {
 				
 		$ch = curl_init();    
 		curl_setopt($ch, CURLOPT_URL,$url); 		// set url to post to
-		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,1);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST,2);
 		curl_setopt($ch, CURLOPT_SSLVERSION, 0);//prevent Poddle attack, have to set 0 to use TLS instead of SSL3 
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
