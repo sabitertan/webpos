@@ -234,7 +234,6 @@ class ControllerPaymentWebpos extends Controller {
 		
 		$method_response=array();
 		$method_response=$this->{'webpos_'.$webpos_bank['method'].$webpos_bank['model']}->bankResponse($bank_response,$webpos_bank);
-		//print_r($bank_response);
 		if ($method_response['result']==1){
 			$message=$method_response['message'].$webpos_bank['name'];
 			$this->model_checkout_order->addOrderHistory($order_id, $this->config->get('webpos_order_status_id'), $message, false);
