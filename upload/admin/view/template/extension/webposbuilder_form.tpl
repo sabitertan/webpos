@@ -1,6 +1,6 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <?php $pos_methods=array('nestpay', 'gvp', 'posnet', 'boa', 'get724', 'payflex'); ?>
-<?php $pos_models=array('Classic', '3d_Model', '3d_Pay', '3d_Hosting'); ?>
+<?php $pos_models=array('Classic', '3d_Model', '3d_Pay', '3d_Hosting', 'Hosting'); ?>
 <div id="content">
 <div class="page-header">
 <div class="container-fluid">

@@ -20,7 +20,7 @@ class posnet3DHosting {
 		$xml = simplexml_load_string($posnetRequest);
 		$approved=isset($xml->approved)?$xml->approved:'';
 		if($approved!=1) {
-			$form=array('error'=>'Posnet ön onay Hatası: '.$xml->resptext);
+			$form=array('error'=>'Posnet ön onay Hatası: '.$xml->respText);
 		} else if ($approved==1) {
 			$data1 = $xml->oosRequestDataResponse->data1;
 			$data2 = $xml->oosRequestDataResponse->data2;
@@ -29,7 +29,7 @@ class posnet3DHosting {
 			$inputs=array('posnetData'=>$data1,
 			'posnetData2'=>$data2,
 			'mid'=>$bank['posnet_merchant_id'],
-			'posnetID'=>['posnet_posnet_id'],
+			'posnetID'=>$bank['posnet_posnet_id'],
 			'digest'=>$sign,
 			'vftCode'=>"K001",
 			'merchantReturnURL'=>$bank['success_url'],
@@ -61,8 +61,7 @@ class posnet3DHosting {
 	}
 	
 	private function oosRequest($bank) {
-		$xid=substr("00000000000000000000".$bank['oid'],-20);
-		$expDate=$bank['cc_expire_date_year'].$bank['cc_expire_date_month'];
+		$xid=substr("00000000000000000000".$bank['order_id'],-20);
 		if($bank['instalment']!=0){
 			$instalment=$bank['instalment'];
 		} else {
@@ -178,8 +177,8 @@ class posnet3DHosting {
 		if (curl_errno($ch)) {
 			$result='<posnetResponse>
 			<approved>0</approved>
-			<respcode>cUrlError</respcode>
-			<resptext>cUrl Error: '.curl_error($ch).'</resptext>
+			<respCode>cUrlError</respCode>
+			<respText>cUrl Error: '.curl_error($ch).'</respText>
 			</posnetResponse>';
 		}
 		

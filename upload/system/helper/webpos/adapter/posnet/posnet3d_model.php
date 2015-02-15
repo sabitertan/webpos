@@ -20,7 +20,7 @@ class posnet3DModel {
 		$xml = simplexml_load_string($posnetRequest);
 		$approved=isset($xml->approved)?$xml->approved:'';
 		if($approved!=1) {
-			$form=array('error'=>'Posnet ön onay Hatası: '.$xml->resptext);
+			$form=array('error'=>'Posnet ön onay Hatası: '.$xml->respText);
 		} else if ($approved==1) {
 			$data1 = $xml->oosRequestDataResponse->data1;
 			$data2 = $xml->oosRequestDataResponse->data2;
@@ -29,7 +29,7 @@ class posnet3DModel {
 			$inputs=array('posnetData'=>$data1,
 			'posnetData2'=>$data2,
 			'mid'=>$bank['posnet_merchant_id'],
-			'posnetID'=>['posnet_posnet_id'],
+			'posnetID'=>$bank['posnet_posnet_id'],
 			'digest'=>$sign,
 			'vftCode'=>"K001",
 			'merchantReturnURL'=>$bank['success_url'],
@@ -61,7 +61,7 @@ class posnet3DModel {
 	}
 	
 	private function oosRequest($bank) {
-		$xid=substr("00000000000000000000".$bank['oid'],-20);
+		$xid=substr("00000000000000000000".$bank['order_id'],-20);
 		$expDate=$bank['cc_expire_date_year'].$bank['cc_expire_date_month'];
 		if($bank['instalment']!=0){
 			$instalment=$bank['instalment'];
@@ -82,7 +82,7 @@ class posnet3DModel {
 		"<currencyCode>YT</currencyCode>".
 		"<installment>".$instalment."</installment>".
 		"<XID>".$xid."</XID>".
-		"<cardHolderName>".$bank['cc_name']."</cardHolderName>".
+		"<cardHolderName>".$bank['cc_owner']."</cardHolderName>".
 		"<tranType>Sale</tranType>".
 		"</oosRequestData>".
 		"</posnetRequest>";
@@ -177,7 +177,7 @@ class posnet3DModel {
 			$result='<posnetResponse>
 			<approved>0</approved>
 			<respcode>cUrlError</respcode>
-			<resptext>cUrl Error: '.curl_error($ch).'</resptext>
+			<respText>cUrl Error: '.curl_error($ch).'</respText>
 			</posnetResponse>';
 		}
 		

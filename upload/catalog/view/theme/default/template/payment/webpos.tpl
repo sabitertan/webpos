@@ -1,7 +1,9 @@
 <form class="form-horizontal">
 
   <fieldset id="payment">
-  <?php if($payment_model!="3d_Hosting") { ?>
+ <?php if($payment_model=="3d_Hosting" || $payment_model=="Hosting"){ ?> 
+  <label class="col-sm-3 control-label"><?php echo $text_3d_hosting; ?></label>
+ <?php } else { ?>
     <legend><?php echo $text_credit_card; ?></legend>
     <div class="form-group required">
       <label class="col-sm-2 control-label" for="input-cc-owner"><?php echo $entry_cc_owner; ?></label>
@@ -45,10 +47,6 @@
         <input type="text" name="cc_cvv2" value="" placeholder="<?php echo $entry_cc_cvv2; ?>" id="input-cc-cvv2" class="form-control" />
       </div>
     </div>
-  <?php } else if($payment_model=="3d_Hosting"){ ?> 
-  <label class="col-sm-3 control-label"><?php echo $text_3d_hosting; ?></label>
-  
-  
   <?php } ?>
   </fieldset>
 </form>

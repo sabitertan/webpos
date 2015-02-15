@@ -42,9 +42,6 @@ class ControllerPaymentWebpos extends Controller {
 		$bank_id=$this->session->data['webpos_bank_id'];
 		$bank=$this->getbank($bank_id);
 		$data['payment_model']=$bank['model'];
-		if($bank['method']=="posnet" && $bank['model']=="classic") {
-		$data['payment_model']="3d_Hosting";
-		}
 		
 		if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/webpos.tpl')) {
 			return $this->load->view($this->config->get('config_template') . '/template/payment/webpos.tpl', $data);
@@ -153,7 +150,9 @@ class ControllerPaymentWebpos extends Controller {
 		} else {
 			$instalment=0;
 		}
-		if($webpos_bank['model']!="3d_Hosting"){
+		if($webpos_bank['model']=="3d_Hosting" || $webpos_bank['model']=="Hosting"){
+			//
+		} else {
 		$webpos_bank['cc_owner']=$this->request->post['cc_owner'];
 		$webpos_bank['cc_number']=$this->request->post['cc_number'];
 		$webpos_bank['cc_cvv2']=$this->request->post['cc_cvv2'];
@@ -188,7 +187,7 @@ class ControllerPaymentWebpos extends Controller {
 			unset($this->session->data['instalment']);
 			unset($this->session->data['webpos_bank_id']);
 		} else if(isset($method_response['error'])) {
-			$json['error'] = $method_response['message'];
+			$json['error'] = $method_response['error'];
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
