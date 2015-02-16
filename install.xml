@@ -152,7 +152,7 @@ $(document).ready(function () {
 		<file path="catalog/view/theme/default/template/product/product.tpl">
 		<operation info="instalments to product page">
 			<search index="2"><![CDATA[</ul>]]></search>
-			<add position="before"><![CDATA[			<?php if ($tab_instalment) { ?>
+			<add position="before"><![CDATA[			<?php if (isset($tab_instalment)) { ?>
             <li><a href="#tab-instalment" data-toggle="tab"><?php echo $tab_instalment; ?></a></li>
             <?php } ?>]]></add>
 		</operation>
