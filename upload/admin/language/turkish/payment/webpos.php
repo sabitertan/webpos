@@ -43,6 +43,14 @@ $_['entry_posnet_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classi
 $_['entry_posnet_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 
 // Entry BOA
+$_['entry_boa_merchant_id']        = 'Mağaza No(Merchant ID(MID)):';
+$_['entry_boa_customer_id']        = 'Müşteri No(Customer ID):';
+$_['entry_boa_classic_name']     = 'Müşteri Adı(Client-Api Name):';
+$_['entry_boa_classic_password']         = 'Şifre (Classic-Api Password):';
+$_['entry_boa_test_url']         = 'Test Bağlantısı(Test URL):';
+$_['entry_boa_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classic URL):';
+$_['entry_boa_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
+
 // Entry GET724
 // Entry PAYFLEX
 
