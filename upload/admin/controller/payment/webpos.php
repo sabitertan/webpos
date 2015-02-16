@@ -26,7 +26,7 @@ class ControllerPaymentWebPos extends Controller {
 		$data['text_test'] = $this->language->get('text_test');
 		$data['text_live'] = $this->language->get('text_live');
 		$data['text_debug'] = $this->language->get('text_debug');
-	
+		
 		$data['tab_general'] = $this->language->get('tab_general');
 
 		$data['entry_mode'] = $this->language->get('entry_mode');
@@ -93,7 +93,6 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_nestpay_test_url']=   $this->language->get('entry_nestpay_test_url');
 		$data['entry_nestpay_classic_url']=  $this->language->get('entry_nestpay_classic_url');
 		$data['entry_nestpay_3D_url']=   $this->language->get('entry_nestpay_3D_url');
-
 		
 		//GVP
 		$data['entry_gvp_terminal_id']=   $this->language->get('entry_gvp_terminal_id');
@@ -116,6 +115,17 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_posnet_classic_url']=   $this->language->get('entry_posnet_classic_url');
 		$data['entry_posnet_3D_url']=   $this->language->get('entry_posnet_3D_url');
 		//
+		
+		//BOA
+		$data['entry_boa_merchant_id']        = $this->language->get('entry_boa_merchant_id');
+		$data['entry_boa_customer_id']        = $this->language->get('entry_boa_customer_id');
+		$data['entry_boa_classic_name']     = $this->language->get('entry_boa_classic_name');
+		$data['entry_boa_classic_password']         = $this->language->get('entry_boa_classic_password');
+		$data['entry_boa_test_url']         = $this->language->get('entry_boa_test_url');
+		$data['entry_boa_classic_url']      = $this->language->get('entry_boa_classic_url');
+		$data['entry_boa_3D_url']         = $this->language->get('entry_boa_3D_url');
+		//
+		
 		$this->load->model('extension/webposbuilder');
 		$banks=$this->model_extension_webposbuilder->getbanks(array('sort'=>'bank_id'));
 		//fix key sort order

@@ -22,6 +22,7 @@ $_['entry_nestpay_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Class
 $_['entry_nestpay_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 $_['entry_nestpay_3D_storekey']         = '3D Şifresi(3D storekey,Merchant Key):';
 $_['entry_nestpay_3D_storename']         = 'Mağaza Adı(Firma Adı, Merchant Name, Store Name):';
+
 // Entry GVP
 $_['entry_gvp_terminal_id']        = 'Terminal ID(TID):';
 $_['entry_gvp_merchant_id']        = 'Merchant ID(MID):';
@@ -32,6 +33,7 @@ $_['entry_gvp_3D_storekey']         = '3D Şifresi(3D storekey,Merchant Key):';
 $_['entry_gvp_test_url']         = 'Test Bağlantısı(Test URL):';
 $_['entry_gvp_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classic URL):';
 $_['entry_gvp_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
+
 // Entry POSNET
 $_['entry_posnet_posnet_id']        = 'Posnet ID(Client ID, PID):';
 $_['entry_posnet_terminal_id']        = 'Terminal ID(TID):';
@@ -43,6 +45,14 @@ $_['entry_posnet_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classi
 $_['entry_posnet_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 
 // Entry BOA
+$_['entry_boa_merchant_id']        = 'Mağaza No(Merchant ID(MID)):';
+$_['entry_boa_customer_id']        = 'Müşteri No(Customer ID):';
+$_['entry_boa_classic_name']     = 'Müşteri Adı(Client-Api Name):';
+$_['entry_boa_classic_password']         = 'Şifre (Classic-Api Password):';
+$_['entry_boa_test_url']         = 'Test Bağlantısı(Test URL):';
+$_['entry_boa_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classic URL):';
+$_['entry_boa_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
+
 // Entry GET724
 // Entry PAYFLEX
 
