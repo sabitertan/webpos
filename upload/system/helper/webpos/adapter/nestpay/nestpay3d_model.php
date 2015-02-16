@@ -111,13 +111,13 @@ class nestpay3DModel {
 				$xml_response=$this->xmlSend($xml_fields);
 				$xml = simplexml_load_string($xmlstring);
 				
-				$Response=isset($xml->Response)?$xml->Response:'';
-				$OrderId=isset($xml->OrderId)?$xml->OrderId:'';
-				$AuthCode=isset($xml->AuthCode)?$xml->AuthCode:'';
-				$ProcReturnCode=isset($xml->ProcReturnCode)?$xml->ProcReturnCode:'';
-				$ErrMsg=isset($xml->ErrMsg)?$xml->ErrMsg:'';
-				$HostRefNum=isset($xml->HostRefNum)?$xml->HostRefNum:'';
-				$TransId=isset($xml->TransId)?$xml->TransId:'';
+				$Response=isset($xml->Response)?(string)$xml->Response:'';
+				$OrderId=isset($xml->OrderId)?(string)$xml->OrderId:'';
+				$AuthCode=isset($xml->AuthCode)?(string)$xml->AuthCode:'';
+				$ProcReturnCode=isset($xml->ProcReturnCode)?(string)$xml->ProcReturnCode:'';
+				$ErrMsg=isset($xml->ErrMsg)?(string)$xml->ErrMsg:'';
+				$HostRefNum=isset($xml->HostRefNum)?(string)$xml->HostRefNum:'';
+				$TransId=isset($xml->TransId)?(string)$xml->TransId:'';
 				
 				if($ProcReturnCode =="00" || $Response === "Approved") {
 					$response['result']=1;

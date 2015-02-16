@@ -18,13 +18,13 @@ class posnet3DModel {
 		private function createForm($bank) {
 		$posnetRequest=$this->oosRequest($bank);
 		$xml = simplexml_load_string($posnetRequest);
-		$approved=isset($xml->approved)?$xml->approved:'';
+		$approved=isset($xml->approved)?(string)$xml->approved:'';
 		if($approved!=1) {
-			$form=array('error'=>'Posnet ön onay Hatası: '.$xml->respText);
+			$form=array('error'=>'Posnet ön onay Hatası: '.(string)$xml->respText);
 		} else if ($approved==1) {
-			$data1 = $xml->oosRequestDataResponse->data1;
-			$data2 = $xml->oosRequestDataResponse->data2;
-			$sign = $xml->oosRequestDataResponse->sign;
+			$data1 = (string)$xml->oosRequestDataResponse->data1;
+			$data2 = (string)$xml->oosRequestDataResponse->data2;
+			$sign = (string)$xml->oosRequestDataResponse->sign;
 			$inputs=array();
 			$inputs=array('posnetData'=>$data1,
 			'posnetData2'=>$data2,
@@ -104,17 +104,17 @@ class posnet3DModel {
 		$url=$bank['posnet_classic_url'];
 		$oosResponse = $this->oosResolve($bank['posnet_merchant_id'],$bank['posnet_terminal_id'],$bankData,$merchantData,$sign,$url);
 		$xml = simplexml_load_string($oosResponse);
-		$approved = $xml->approved;
-		$mdStatus =$xml->oosResolveMerchantDataResponse->mdStatus;
+		$approved = (string)$xml->approved;
+		$mdStatus =(string)$xml->oosResolveMerchantDataResponse->mdStatus;
 		if (($approved == 1) && ($mdStatus==1)){ 
 			$oosTran=$this->oosTran($bank['posnet_merchant_id'],$bank['posnet_terminal_id'],$bankData,$url);
 			$xmlTran=simplexml_load_string($oosTran);
-			$approvedTran = $xmlTran->approved;
+			$approvedTran = (string)$xmlTran->approved;
 			if ($approvedTran==1){
-				$hostlogkey = $xmlTran->hostlogkey;
-				$authCode = $xmlTran->authCode;
-				$inst1 = $xmlTran->instInfo->inst1;
-				$amnt1 = $xmlTran->instInfo->amnt1;
+				$hostlogkey = (string)$xmlTran->hostlogkey;
+				$authCode = (string)$xmlTran->authCode;
+				$inst1 = (string)$xmlTran->instInfo->inst1;
+				$amnt1 = (string)$xmlTran->instInfo->amnt1;
 				$response['result']=1;
 				$response['message'].='Ödeme Başarılı<br/>';
 				$response['message'].='AuthCode : '.$authCode.'<br/>';
@@ -123,11 +123,11 @@ class posnet3DModel {
 				$response['message'].='Amount : '.$amnt1.'<br/>';
 			} else {
 				$response['result']=0;
-				$response['message'].=$xmlTran->respText;
+				$response['message'].=(string)$xmlTran->respText;
 			}
 		} else {
 			$response['result']=0;
-			$response['message'].=$xmlTran->respText;
+			$response['message'].=(string)$xmlTran->respText;
 		}
 		return $response;
 	}

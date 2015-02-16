@@ -20,22 +20,22 @@ class nestpayClassic {
 		'cv2' => $bank['cc_cvv2'],
 		'cardType'=>$bank['cc_type'],
 		'ip' => $bank['customer_ip'],
-		'tutar' => $bank['amount'],
+		'tutar' => $bank['total'],
 		'taksit' => $bank['taksit'],	
-		'oid' => $bank['oid'],
+		'oid' => $bank['order_id'],
 		'email' => ''
 		);
 		//field
 		$xml_response=$this->xmlSend($xml_fields);
-		$xml = simplexml_load_string($xmlstring);
+		$xml = simplexml_load_string($xml_response);
 		
-		$Response=isset($xml->Response)?$xml->Response:'';
-		$OrderId=isset($xml->OrderId)?$xml->OrderId:'';
-		$AuthCode=isset($xml->AuthCode)?$xml->AuthCode:'';
-		$ProcReturnCode=isset($xml->ProcReturnCode)?$xml->ProcReturnCode:'';
-		$ErrMsg=isset($xml->ErrMsg)?$xml->ErrMsg:'';
-		$HostRefNum=isset($xml->HostRefNum)?$xml->HostRefNum:'';
-		$TransId=isset($xml->TransId)?$xml->TransId:'';
+		$Response=isset($xml->Response)?(string)$xml->Response:'';
+		$OrderId=isset($xml->OrderId)?(string)$xml->OrderId:'';
+		$AuthCode=isset($xml->AuthCode)?(string)$xml->AuthCode:'';
+		$ProcReturnCode=isset($xml->ProcReturnCode)?(string)$xml->ProcReturnCode:'';
+		$ErrMsg=isset($xml->ErrMsg)?(string)$xml->ErrMsg:'';
+		$HostRefNum=isset($xml->HostRefNum)?(string)$xml->HostRefNum:'';
+		$TransId=isset($xml->TransId)?(string)$xml->TransId:'';
 		
 		if($ProcReturnCode =="00" || $Response === "Approved") {
 			$response['result']=1;
