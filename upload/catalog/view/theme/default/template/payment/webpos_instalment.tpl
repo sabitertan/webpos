@@ -11,7 +11,13 @@
 if(!empty($bank['instalment']) || $bank['instalment']!=''){
 ?>
 
-<div class="col-sm-3"><?php echo $bank['name']; ?>
+<div class="col-sm-3">
+				<?php if (!empty($bank['image'])) {?>
+							<img src="<?php echo $bank['image']; ?>"/>
+				<?php } else { ?>
+							<strong><?php echo $bank['name']; ?></strong>
+				<?php } ?>
+
 <?php 
 	
 		foreach($bank['instalments'] as $instalment) { ?>

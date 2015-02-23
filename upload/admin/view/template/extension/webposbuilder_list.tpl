@@ -62,8 +62,12 @@
                 <input type="checkbox" name="selected[]" value="<?php echo $bank['bank_id']; ?>" />
                 <?php } ?></td>
               <td class="text-left"><?php echo $bank['name']; ?></td>
-			  <td class="text-left"><?php echo $bank['image']; ?></td>
-              <td class="text-left"><?php echo $bank['status']; ?></td>
+			  <td class="text-left">
+			  <?php if (!empty($bank['image'])) {?>
+			  <img src="<?php echo $bank['image']; ?>"/>
+			   <?php } ?>
+			  </td>
+			  <td class="text-left"><?php echo $bank['status']; ?></td>
 			  <td class="text-left"><?php echo $bank['method']; ?></td>
 			  <td class="text-left"><?php echo $bank['model']; ?></td>
 			  <td class="text-left"><?php echo $bank['short']; ?></td>

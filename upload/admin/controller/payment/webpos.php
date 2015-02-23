@@ -93,6 +93,7 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_nestpay_test_url']=   $this->language->get('entry_nestpay_test_url');
 		$data['entry_nestpay_classic_url']=  $this->language->get('entry_nestpay_classic_url');
 		$data['entry_nestpay_3D_url']=   $this->language->get('entry_nestpay_3D_url');
+
 		
 		//GVP
 		$data['entry_gvp_terminal_id']=   $this->language->get('entry_gvp_terminal_id');
@@ -115,7 +116,6 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_posnet_classic_url']=   $this->language->get('entry_posnet_classic_url');
 		$data['entry_posnet_3D_url']=   $this->language->get('entry_posnet_3D_url');
 		//
-		
 		//BOA
 		$data['entry_boa_merchant_id']        = $this->language->get('entry_boa_merchant_id');
 		$data['entry_boa_customer_id']        = $this->language->get('entry_boa_customer_id');
@@ -125,7 +125,6 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_boa_classic_url']      = $this->language->get('entry_boa_classic_url');
 		$data['entry_boa_3D_url']         = $this->language->get('entry_boa_3D_url');
 		//
-		
 		$this->load->model('extension/webposbuilder');
 		$banks=$this->model_extension_webposbuilder->getbanks(array('sort'=>'bank_id'));
 		//fix key sort order
@@ -142,10 +141,16 @@ class ControllerPaymentWebPos extends Controller {
 		} else {
 			$data['banks_info'] = $this->config->get('webpos_banks_info');
 		}
-		
+		$this->load->model('tool/image');
 		foreach($banks as $bank) {
+			if (!empty($bank['image'])){
+			$image=$this->model_tool_image->resize($bank['image'], 120, 40);
+			} else {
+				$image='';
+			}
 			$bank_id=$bank['bank_id'];
 			$banks[$bank_id]['entries']=array();
+			$banks[$bank_id]['image']=$image;
 			$position=strlen($bank['method']);
 			$entries=array();
 			$entries=$this->getMethodEntries($data,$bank['method'],$position);

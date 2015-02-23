@@ -170,12 +170,17 @@ class ControllerExtensionWebposBuilder extends Controller {
 		$bank_total = $this->model_extension_webposbuilder->getTotalbanks();
 		
 		$results = $this->model_extension_webposbuilder->getbanks($filter_data);
-		
+		$this->load->model('tool/image');
 		foreach ($results as $result) {
+			if (!empty($result['image'])){
+			$image=$this->model_tool_image->resize($result['image'], 120, 40);
+			} else {
+				$image='';
+			}
 			$data['banks'][] = array(
 				'bank_id' => $result['bank_id'],
 				'name'      => $result['name'],	
-				'image'      => $result['image'],	
+				'image'      => $image,	
 				'method'      => $result['method'],	
 				'model'      => $result['model'],	
 				'short'      => $result['short'],	
@@ -399,8 +404,17 @@ class ControllerExtensionWebposBuilder extends Controller {
 		}
 	
 		$this->load->model('tool/image');
+		//thumb
+		if (isset($this->request->post['image']) && is_file(DIR_IMAGE . $this->request->post['image'])) {
+			$data['thumb'] = $this->model_tool_image->resize($this->request->post['image'], 120, 40);
+		} elseif (!empty($bank_info) && is_file(DIR_IMAGE . $bank_info['image'])) {
+			$data['thumb'] = $this->model_tool_image->resize($bank_info['image'], 120, 40);
+		} else {
+			$data['thumb'] = $this->model_tool_image->resize('catalog/webpos/webpos.png', 120, 40);
+		}
+		//
 	
-		$data['placeholder'] = $this->model_tool_image->resize('no_image.png', 100, 100);
+		$data['placeholder'] = $this->model_tool_image->resize('catalog/webpos/webpos.png', 120, 40);
 	
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');

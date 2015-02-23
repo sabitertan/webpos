@@ -2,7 +2,7 @@
 	<name><![CDATA[Webpos Sanal Pos]]></name>
 	<code><![CDATA[sabitertan_webpos]]></code>
 	<author><![CDATA[sabitertan]]></author>
-	<version><![CDATA[0.1.alpha3]]></version>
+	<version><![CDATA[0.1.alpha4]]></version>
 	<link><![CDATA[http://www.tr-opencart.com/]]></link>
 	
 	<file path="admin/controller/common/menu.php">
@@ -166,7 +166,13 @@ $(document).ready(function () {
 						if(!empty($bank['instalment']) || $bank['instalment']!=''){ ?>
 				<table class="col-sm-3">
 					<thead>
-						<tr><td><strong><?php echo $bank['name']; ?></strong></td></tr>
+						<tr><td>
+							<?php if (!empty($bank['image'])) {?>
+							<img src="<?php echo $bank['image']; ?>"/>
+				<?php } else { ?>
+							<strong><?php echo $bank['name']; ?></strong>
+				<?php } ?>
+						</td></tr>
 					</thead>
 				    <tbody>
 					<?php foreach($bank['instalments'] as $instalment) { ?>

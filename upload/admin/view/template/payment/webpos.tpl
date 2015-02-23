@@ -28,7 +28,12 @@
 		          <ul class="nav nav-tabs">
             <li class="active"><a href="#tab-general" data-toggle="tab"><?php echo $tab_general; ?></a></li>
 			<?php foreach ($banks as $tab_bank) { ?>
-            <li><a href="#tab-bank-<?php echo $tab_bank['bank_id']; ?>" data-toggle="tab"><?php echo $tab_bank['name']; ?></a></li>
+            <li><a href="#tab-bank-<?php echo $tab_bank['bank_id']; ?>" data-toggle="tab">
+			<?php if (!empty($tab_bank['image'])) {?>
+			  <img src="<?php echo $tab_bank['image']; ?>"/>
+			   <?php } else { ?>
+			<?php echo $tab_bank['name']; }?>
+			</a></li>
             <?php } ?>
           </ul>
 		<div class="tab-content">
@@ -135,6 +140,7 @@
 					<div class="tab-pane" id="tab-bank-<?php echo $tab_bank['bank_id']; ?>">
 					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][bank_id]" value="<?php echo $tab_bank['bank_id']; ?>" />
 					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][name]" value="<?php echo $tab_bank['name']; ?>" />
+					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][image]" value="<?php echo $tab_bank['image']; ?>" />
 					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][method]" value="<?php echo $tab_bank['method']; ?>" />
 					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][model]" value="<?php echo $tab_bank['model']; ?>" />
 					<input type="hidden" name="webpos_banks_info[<?php echo $tab_bank['bank_id']; ?>][status]" value="<?php echo $tab_bank['status']; ?>" />
