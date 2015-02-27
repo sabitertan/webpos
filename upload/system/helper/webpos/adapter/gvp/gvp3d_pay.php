@@ -13,7 +13,8 @@ class gvp3dPay {
 		} else {
 			$instalment="";
 		}
-		$hash=$this->createHash($bank['gvp_terminal_id'],$bank['order_id'],$bank['total'],$bank['success_url'],$bank['fail_url'],"sales",$instalment,$bank['gvp_3D_storekey'],$bank['gvp_provaut_password']);
+		$amount=(int)($bank['total']*100);
+		$hash=$this->createHash($bank['gvp_terminal_id'],$bank['order_id'],$amount,$bank['success_url'],$bank['fail_url'],"sales",$instalment,$bank['gvp_3D_storekey'],$bank['gvp_provaut_password']);
 		
 		$inputs=array();
 		$inputs=array('secure3dsecuritylevel'=>"3D_PAY", //3D_PAY,3D_FULL,3D_HALF @TODO: should create a variable for this
@@ -27,7 +28,7 @@ class gvp3dPay {
 		'terminaluserid'=>$bank['gvp_user_name'],
 		'terminalmerchantid'=>$bank['gvp_merchant_id'],
 		'txntype'=>"sales",
-		'txnamount'=>$bank['total'],
+		'txnamount'=>$amount,
 		'txncurrencycode'=>"949",
 		'txninstallmentcount'=>$instalment,
 		'orderid'=>$bank['order_id'],

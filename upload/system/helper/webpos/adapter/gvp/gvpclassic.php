@@ -15,13 +15,14 @@ class gvpClassic {
 		} else {
 			$instalment="";
 		}
+		$amount=(int)($bank['total']*100);
 		$action='';
 		if ($bank['mode']=='live') {
 			$action=$bank['gvp_classic_url'];
 		} else if ($bank['mode']=='test') {
 			$action=$bank['gvp_test_url'];
 		}
-		$hash=$this->createHash($bank['order_id'],$bank['gvp_terminal_id'],$bank['cc_number'],$bank['total'],$bank['gvp_provaut_password']);
+		$hash=$this->createHash($bank['order_id'],$bank['gvp_terminal_id'],$bank['cc_number'],$amount,$bank['gvp_provaut_password']);
 		$expiredate=$bank['cc_expire_date_month'].$bank['cc_expire_date_year'];
 		$xml_fields=array('mode'=>"PROD",
 		'version'=>"v0.01",
@@ -38,7 +39,7 @@ class gvpClassic {
 		'oid'=>$bank['order_id'],
 		'type'=>"sales",
 		'instalment'=>$instalment,
-		'amount'=>$bank['total'],
+		'amount'=>$amount,
 		'currency'=>"949",
 		'url'=>$action,
 		'bank_id'=>$bank['bank_id']
