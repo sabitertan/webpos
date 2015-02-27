@@ -217,12 +217,13 @@ class ControllerPaymentWebpos extends Controller {
 		
 		$this->load->model('checkout/order');
 		
-		$bank_id=$this->request->post['bank_id'];
-		$order_id=$this->request->post['oid'];
+		//$bank_id=$this->request->post['bank_id'];
+		$bank_id=$this->session->data['webpos_bank_id'];
+		//$order_id=$this->request->post['oid'];
+		$order_id=$this->session->data['order_id'];
 		
 		$bank_response=$this->request->post;
 		$banks=$this->config->get('webpos_banks_info');
-		//$bank_id=$this->session->data['webpos_bank_id'];
 		foreach ($banks as $bank) {
 			if($bank['bank_id']==$bank_id){
 				$webpos_bank=$bank;

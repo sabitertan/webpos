@@ -36,8 +36,6 @@ class posnet3DModel {
 			'lang'=>"tr",
 			'url'=>"",
 			'openANewWindow'=>"0",
-			'bank_id'=>$bank['bank_id'],
-			'oid'=>$bank['order_id'],
 			'useJokerVadaa'=>"1");
 			$action='';
 			if ($bank['mode']=='live') {
@@ -71,7 +69,7 @@ class posnet3DModel {
 			$instalment="00";
 		}
 		
-		$xml="xmldata=<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
+		$xml="<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
 		"<posnetRequest>".
 		"<mid>".$bank['posnet_merchant_id']."</mid>".
 		"<tid>".$bank['posnet_terminal_id']."</tid>".
@@ -80,7 +78,7 @@ class posnet3DModel {
 		"<ccno>".$bank['cc_number']."</ccno>".
 		"<expDate>".$expDate."</expDate>".
 		"<cvc>".$bank['cc_cvv2']."</cvc>".
-		"<amount>".$bank['total']."</amount>".
+		"<amount>".(int)($bank['total']*100)."</amount>".
 		"<currencyCode>YT</currencyCode>".
 		"<installment>".$instalment."</installment>".
 		"<XID>".$xid."</XID>".
@@ -106,7 +104,7 @@ class posnet3DModel {
 		$xml = simplexml_load_string($oosResponse);
 		$approved = (string)$xml->approved;
 		$mdStatus =(string)$xml->oosResolveMerchantDataResponse->mdStatus;
-		if (($approved == 1) && ($mdStatus==1)){ 
+		if ($approved == 1){ 
 			$oosTran=$this->oosTran($bank['posnet_merchant_id'],$bank['posnet_terminal_id'],$bankData,$url);
 			$xmlTran=simplexml_load_string($oosTran);
 			$approvedTran = (string)$xmlTran->approved;
@@ -123,16 +121,17 @@ class posnet3DModel {
 				$response['message'].='Amount : '.$amnt1.'<br/>';
 			} else {
 				$response['result']=0;
-				$response['message'].=(string)$xmlTran->respText;
-			}
+				$response['message'].=((string)$xmlTran->respText).' TranError Code:'.((string)$xmlTran->respCode);			
+				}
 		} else {
 			$response['result']=0;
-			$response['message'].=(string)$xmlTran->respText;
+			$response['message'].=((string)$xml->respText).' Error Code:'.((string)$xml->respCode);
+			
 		}
 		return $response;
 	}
 		private function oosResolve($mid,$tid,$bankData,$merchantData,$sign,$url){
-		$xml="xmldata=<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
+		$xml="<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
 		"<posnetRequest>".
 		"<mid>".$mid."</mid>".
 		"<tid>".$tid."</tid>".
@@ -146,7 +145,7 @@ class posnet3DModel {
 		return $result;
 	}
 	private function oosTran($mid,$tid,$bankData,$url){
-		$xml="xmldata=<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
+		$xml="<?xml version=\"1.0\" encoding=\"ISO-8859-9\"?>".
 		"<posnetRequest>".
 		"<mid>".$mid."</mid>".
 		"<tid>".$tid."</tid>".
@@ -171,14 +170,14 @@ class posnet3DModel {
 		curl_setopt($ch, CURLOPT_FRESH_CONNECT, 1);
 		curl_setopt($ch, CURLOPT_TIMEOUT, 90);
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, urlencode($xml));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, 'xmldata='.(urlencode($xml)));
 		
 		
 		$result = curl_exec($ch);
 		if (curl_errno($ch)) {
 			$result='<posnetResponse>
 			<approved>0</approved>
-			<respcode>cUrlError</respcode>
+			<respCode>cUrlError</respCode>
 			<respText>cUrl Error: '.curl_error($ch).'</respText>
 			</posnetResponse>';
 		}
