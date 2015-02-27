@@ -77,7 +77,7 @@ class posnet3DHosting {
 		"<ccno></ccno>".
 		"<expDate></expDate>".
 		"<cvc></cvc>".
-		"<amount>".$bank['total']."</amount>".
+		"<amount>".(int)($bank['total']*100)."</amount>".
 		"<currencyCode>YT</currencyCode>".
 		"<installment>".$instalment."</installment>".
 		"<XID>".$xid."</XID>".

@@ -23,7 +23,7 @@ class posnetHosting {
 			'mid'=>$bank['posnet_merchant_id'],
 			'xid'=>$xid,
 			'tranType'=>"Sale",
-			'amount'=>$bank['total'],
+			'amount'=>(int)($bank['total']*100),
 			'instalment'=>$instalment,
 			'currencyCode'=>"TL",
 			'merchantReturnSuccessURL'=>$bank['success_url'],
