@@ -103,7 +103,7 @@ class gvp3dModel {
 				);
 				//field
 				$xml_response=$this->xmlSend($xml_fields);
-				$xml = simplexml_load_string($xmlstring);
+				$xml = simplexml_load_string($xml_response);
 				
 				$ReasonCode=(string)$xml->Transaction->Response->ReasonCode;
 				$Response=(string)$xml->Transaction->Response->Message;
