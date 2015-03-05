@@ -15,7 +15,7 @@ class boaClassic {
 		$hash= base64_encode(sha1($hashstr,"ISO-8859-9"));
 		if($bank['cc_type']==1){
 			$cardType="VISA";
-		} else if($bank['cc_type']==1){
+		} else if($bank['cc_type']==2){
 			$cardType="MasterCard";
 		}
 		$xml_fields=array('okUrl'=>$bank['success_url'],
@@ -98,7 +98,7 @@ class boaClassic {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
 		curl_setopt($ch, CURLOPT_TIMEOUT, 90); 		// times out after 90s
-		curl_setopt($ch, CURLOPT_POSTFIELDS, urlencode($request)); // add POST fields
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $request); // add POST fields
 		
 		$result = curl_exec($ch);
 		
