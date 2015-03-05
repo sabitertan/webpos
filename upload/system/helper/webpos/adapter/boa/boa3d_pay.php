@@ -15,7 +15,7 @@ class boa3dPay {
 		$hash= base64_encode(sha1($hashstr,"ISO-8859-9"));
 		if($bank['cc_type']==1){
 			$cardType="VISA";
-		} else if($bank['cc_type']==1){
+		} else if($bank['cc_type']==2){
 			$cardType="MasterCard";
 		}
 		
