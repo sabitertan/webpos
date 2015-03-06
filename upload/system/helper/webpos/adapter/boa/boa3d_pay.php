@@ -42,26 +42,34 @@ class boa3dPay {
 		);
 		//field
 		$xml_response=$this->xmlSend($xml_fields);
-		$xml = simplexml_load_string($xml_response);
+		$form=explode('form',$xml_response);
+		$form='<form '.$form[1].'form>';
+		$form=str_replace('name="downloadForm"','id="webpos_form" name="webpos_form"',$form);
+
+		//$response['error']=;
+		//$response['message']=;
+			
+			$response['form']=$form;
+		return $response;
 		
-		$ResponseMessage=isset($xml->ResponseMessage)?(string)$xml->ResponseMessage:'';
-		$OrderId=isset($xml->MerchantOrderID)?(string)$xml->MerchantOrderID:'';
-		$ResponseCode=isset($xml->ResponseCode)?(string)$xml->ResponseCode:'';
+	}
+	public function bankResponse($bank_response,$bank){
+				
+		$ResponseMessage=isset($bank_response['ResponseMessage'])?$bank_response['ResponseMessage']:'';
+		$OrderId=isset($bank_response['MerchantOrderID'])?$bank_response['MerchantOrderID']:'';
+		$ResponseCode=isset($bank_response['ResponseCode'])?$bank_response['ResponseCode']:'';
 	
 		if($ResponseCode =="00") {
 			$response['result']=1;
 			$response['message'].='Ödeme Başarılı<br/>';
 			$response['message'].='ResponseMessage : '.$ResponseMessage.'<br/>';
 			$response['message'].='ResponseCode : '.$ResponseCode.'<br/>';
-			$response['redirect']='success';
+			$response['message'].='MerchantOrderID : '.$OrderId.'<br/>';
 		} else {
 			$response['result']=0;
-			$response['error']=$ResponseMessage;
+			$response['message']=$ResponseMessage;
 		}
-		//$response['form']=;
-		
 		return $response;
-		
 	}
 
 	private function xmlSend($fields){
@@ -115,9 +123,10 @@ class boa3dPay {
 		*/
 		
 		curl_close($ch);
-		if (strpos( $result, "<KuveytTurkVPosResponse>" )!==true){
+		/*if (strpos( $result, "<KuveytTurkVPosResponse>" )!==true){
 			$result='<KuveytTurkVPosResponse><ResponseMessage>XML Error: '.$result.'</ResponseMessage></KuveytTurkVPosResponse>';
-		}
+		}*/
+		
 		return $result;
 	}
 }
