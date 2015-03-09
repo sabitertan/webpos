@@ -243,7 +243,7 @@ class ControllerPaymentWebpos extends Controller {
 			unset($this->session->data['webpos_bank_id']);
 			//standard opencart redirect
 			$data['continue'] = $this->url->link('checkout/success');
-
+			$data['message']=$method_response['message'];
 			if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/webpos_success.tpl')) {
 				$this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/webpos_success.tpl', $data));
 			} else {
