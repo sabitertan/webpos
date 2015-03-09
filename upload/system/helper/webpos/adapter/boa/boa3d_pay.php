@@ -61,7 +61,7 @@ class boa3dPay {
 	
 		if($ResponseCode =="00") {
 			$response['result']=1;
-			$response['message'].='Ödeme Başarılı<br/>';
+			$response['message']='Ödeme Başarılı<br/>';
 			$response['message'].='ResponseMessage : '.$ResponseMessage.'<br/>';
 			$response['message'].='ResponseCode : '.$ResponseCode.'<br/>';
 			$response['message'].='MerchantOrderID : '.$OrderId.'<br/>';
