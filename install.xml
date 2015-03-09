@@ -2,15 +2,15 @@
 	<name><![CDATA[Webpos Sanal Pos]]></name>
 	<code><![CDATA[sabitertan_webpos]]></code>
 	<author><![CDATA[sabitertan]]></author>
-	<version><![CDATA[0.1.alpha5]]></version>
+	<version><![CDATA[0.1.alpha6]]></version>
 	<link><![CDATA[http://www.tr-opencart.com/]]></link>
 	
 	<file path="admin/controller/common/menu.php">
-		<operation info="Adding advanced slider text to header">
+		<operation info="Adding webpos text to header">
 			<search><![CDATA[		$data['text_feed'] = $this->language->get('text_feed');]]></search>
 			<add position="after" ><![CDATA[		$data['text_webpos_builder'] = $this->language->get('text_webpos_builder');]]></add>
 		</operation>
-		<operation info="Adding advanced slider link to header">
+		<operation info="Adding webpos link to header">
 			<search><![CDATA[		$data['feed'] = $this->url->link('extension/feed', 'token=' . $this->session->data['token'], 'SSL');]]></search>
 			<add position="after"><![CDATA[		$data['webpos_builder'] = $this->url->link('extension/webposbuilder', 'token=' . $this->session->data['token'], 'SSL');]]></add>
 		</operation>
@@ -105,7 +105,7 @@
 		</operation>
 	</file>
 	<file path="catalog/view/theme/default/template/checkout/payment_method.tpl">
-		<operation info="instalment and webpos bank id variables to session">
+		<operation info="instalments to payment page">
 			<search index="3"><![CDATA[<?php } ?>]]></search>
 			<add position="after"><![CDATA[<!-- webpos -->
 <div id="instalments" class="row" style="display: none;"></div>
