@@ -24,4 +24,12 @@ $_['entry_cc_owner']       = 'Kart Sahibi:';
 $_['entry_cc_number']      = 'Kart Numarası:';
 $_['entry_cc_expire_date'] = 'Geçerlilik Tarihi - Kart Tipi:';
 $_['entry_cc_cvv2']        = 'Güvenlik Kodu (CVV2):';
+
+//Error
+$_['error_fix']       = 'Lütfen Aşağıdaki Hataları Düzeltiniz:';
+$_['error_cc_owner']  = 'Kart Sahibi boş bırakılamaz';
+$_['error_cc_number'] = 'Kart Numarası Geçerli Uzunlukta Değil';
+$_['error_cc_cvv2']   = 'Güvenlik Kodu 3 Haneli olmalıdır';
+$_['error_cc_expire_date'] = 'Kartın Kullanım Süresi dolmuş';
+$_['error_cc_number_luhn'] = 'Kart Numarası geçersiz';
 ?>
