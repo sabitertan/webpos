@@ -4,7 +4,7 @@ class ModelTotalWebposTotal extends Model {
 		$this->load->language('total/webpostotal');
 		$webpos_title='';
 		$webpos_total=0;
-		if (isset($this->session->data['instalment']) && ($this->request->request['route']=='checkout/checkout')){
+		if (isset($this->session->data['instalment']) && ($this->request->request['route']=='checkout/checkout' || $this->request->request['route']=='checkout/confirm')){
 			$bank_array=explode('_',$this->session->data['instalment']);
 			$instalment_array=explode('x',$bank_array[1]);
 			$instalment=intval($instalment_array[0]);
