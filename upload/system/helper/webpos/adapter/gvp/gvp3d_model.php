@@ -133,7 +133,7 @@ class gvp3dModel {
 	}
 	private function xmlSend($fields){
 
-			$request = "data=<?xml version=\"1.0\" encoding=\"UTF-8\"?>
+			$request = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>
 					<GVPSRequest>
 					<Mode>".$fields['mode']."</Mode>
 					<Version>".$fields['version']."</Version>
@@ -197,7 +197,7 @@ class gvp3dModel {
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
 		curl_setopt($ch, CURLOPT_TIMEOUT, 90); 		// times out after 90s
-		curl_setopt($ch, CURLOPT_POSTFIELDS, urlencode($request)); // add POST fields
+		curl_setopt($ch, CURLOPT_POSTFIELDS, "data=".$request); // add POST fields
 				
 		$result = curl_exec($ch);
 		
