@@ -12,22 +12,23 @@ class ModelTotalWebposTotal extends Model {
 			$price=floatval(substr($instalment_array[1],0,-2));
 			$ratio=floatval($this->config->get('webpostotal_single_ratio'));
 			if($instalment!=0){
-				$webpos_total=$price*$instalment;
+				$webpos_total=$price*$instalment - $total;
 				$webpos_title=$this->language->get('text_total').'('.$bank_array[1].')';
 			} else {
-				if ($ratio>=0){
+				if ($ratio>0){
 					$webpos_title=$this->language->get('text_single_positive').'(%'.$ratio.')';
 				} else if($ratio<0){
 					$webpos_title=$this->language->get('text_single_negative').'(%'.$ratio.')';
+				} else {
+					$webpos_title=$this->language->get('text_no_commision');
 				}
-				//$webpos_total=$price+($price*$ratio/100);
-				$webpos_total=$price;
+				$webpos_total=$price-$total;
 			}
-			$total+=$webpos_total-$total;
+			$total+=$webpos_total;
 			$total_data[] = array(
 			'code'       => 'webpostotal',
 			'title'      => $webpos_title,
-			'value'      => $webpos_total,
+			'value'      => $total,
 			'sort_order' => $this->config->get('webpostotal_sort_order')
 			);
 		} else {
