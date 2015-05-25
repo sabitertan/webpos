@@ -1,7 +1,7 @@
 <form class="form-horizontal">
 
   <fieldset id="payment">
- <?php if($payment_model=="3d_Hosting" || $payment_model=="Hosting"){ ?> 
+ <?php if($payment_model=="3d_hosting" || $payment_model=="hosting"){ ?> 
   <label class="col-sm-3 control-label"><?php echo $text_3d_hosting; ?></label>
  <?php } else { ?>
     <legend><?php echo $text_credit_card; ?></legend>
