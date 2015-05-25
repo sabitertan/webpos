@@ -153,7 +153,7 @@ class ControllerPaymentWebpos extends Controller {
 		}
 		
 		$webpos_error=array();
-		if($webpos_bank['model']=="3d_Hosting" || $webpos_bank['model']=="Hosting"){
+		if($webpos_bank['model']=="3d_hosting" || $webpos_bank['model']=="hosting"){
 			//
 		} else {
 			$webpos_error=$this->validate();
