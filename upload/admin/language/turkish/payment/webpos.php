@@ -58,6 +58,7 @@ $_['entry_boa_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 
 //Tabs
 $_['tab_general']              = 'Genel';
+$_['tab_add']              = 'Banka Ekle';
 // Entry
 
 $_['entry_mode']                = 'Ödeme Modu:';

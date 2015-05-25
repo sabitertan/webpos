@@ -35,6 +35,7 @@
 			<?php echo $tab_bank['name']; }?>
 			</a></li>
             <?php } ?>
+			<li><a href="<?php echo $tab_add_url; ?>"><?php echo $tab_add; ?></a></li>
           </ul>
 		<div class="tab-content">
          <div class="tab-pane active in" id="tab-general">

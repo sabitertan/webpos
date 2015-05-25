@@ -28,6 +28,8 @@ class ControllerPaymentWebPos extends Controller {
 		$data['text_debug'] = $this->language->get('text_debug');
 		
 		$data['tab_general'] = $this->language->get('tab_general');
+		$data['tab_add'] = $this->language->get('tab_add');
+		$data['tab_add_url'] = $this->url->link('extension/webposbuilder', 'token=' . $this->session->data['token'], 'SSL');
 
 		$data['entry_mode'] = $this->language->get('entry_mode');
 		$data['entry_total'] = $this->language->get('entry_total');
