@@ -246,4 +246,28 @@ class ControllerPaymentWebPos extends Controller {
 		}
 		return $entries;
 	}
+
+	public function install() {
+		if (!$this->user->hasPermission('modify', 'payment/webpos')) {
+			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+		} else {
+			$this->load->model('payment/webpos');
+
+			$this->model_payment_webpos->install();
+
+			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+		}
+	}
+
+	public function uninstall() {
+		if (!$this->user->hasPermission('modify', 'payment/webpos')) {
+			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+		} else {
+			$this->load->model('payment/webpos');
+
+			$this->model_payment_webpos->uninstall();
+
+			$this->response->redirect($this->url->link('extension/payment', 'token=' . $this->session->data['token'], 'SSL'));
+		}
+	}
 }
