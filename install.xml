@@ -2,7 +2,7 @@
 	<name><![CDATA[Webpos Sanal Pos]]></name>
 	<code><![CDATA[sabitertan_webpos]]></code>
 	<author><![CDATA[sabitertan]]></author>
-	<version><![CDATA[0.1.alpha6]]></version>
+	<version><![CDATA[1.0beta1]]></version>
 	<link><![CDATA[http://www.tr-opencart.com/]]></link>
 	
 	<file path="admin/controller/common/menu.php">
