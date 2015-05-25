@@ -61,7 +61,6 @@ $_['entry_payu_secret_key']    = 'İşyeri Anahtarı(Secret Key):';
 $_['entry_payu_alu_url']      = 'Ödeme Bağlantısı(ALU URL):';
 //Tabs
 $_['tab_general']              = 'Genel';
-$_['tab_add']              = 'Banka Ekle';
 // Entry
 
 $_['entry_mode']                = 'Ödeme Modu:';

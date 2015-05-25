@@ -1,5 +1,5 @@
 <?php echo $header; ?><?php echo $column_left; ?>
-<?php $pos_methods=array('nestpay', 'gvp', 'posnet', 'boa', 'get724', 'payflex'); ?>
+<?php $pos_methods=array('nestpay', 'gvp', 'posnet', 'boa', 'get724', 'payflex', 'payu'); ?>
 <?php $pos_models=array('classic', '3d_model', '3d_pay', '3d_hosting', 'hosting'); ?>
 <div id="content">
 <div class="page-header">

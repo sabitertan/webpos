@@ -38,7 +38,7 @@ class ControllerPaymentWebpos extends Controller {
 		//add supported cards VISA-MasterCard-Amex etc
 		$data['cc_types'][]=array('text'=>'VISA','value'=>'1');//VISA
 		$data['cc_types'][]=array('text'=>'MasterCard','value'=>'2');//MasterCard
-		//$data['cc_types'][]=array('text'=>'AMEX','value'=>'3');//American Express
+		$data['cc_types'][]=array('text'=>'AMEX','value'=>'3');//American Express
 		$bank_id=$this->session->data['webpos_bank_id'];
 		$bank=$this->getbank($bank_id);
 		$data['payment_model']=$bank['model'];
@@ -184,6 +184,8 @@ class ControllerPaymentWebpos extends Controller {
 			$webpos_bank['order_id']=$this->session->data['order_id']; //unique order id 
 			$webpos_bank['total']=$this->currency->format($order_info['total'], $order_info['currency_code'], false, false);//total order amount
 			$webpos_bank['mode']=$this->config->get('webpos_mode');
+			$webpos_bank['order_info']=$order_info;
+			$webpos_bank['products']=$this->getOrderProducts();
 			
 			$method_response=array();
 			$method_response=$this->{'webpos_'.$webpos_bank['method'].$webpos_bank['model']}->methodResponse($webpos_bank);
@@ -201,6 +203,8 @@ class ControllerPaymentWebpos extends Controller {
 				unset($this->session->data['webpos_bank_id']);
 			} else if(isset($method_response['error'])) {
 				$json['error'] = $method_response['error'];
+			} else if (isset($method_response['payu3d'])) {
+				$json['payu3d']=$method_response['payu3d'];
 			}
 		}
 		
@@ -281,6 +285,39 @@ class ControllerPaymentWebpos extends Controller {
 		}
 		
 
+	}
+		public function getOrderProducts() {
+		$order_data = array();
+				foreach ($this->cart->getProducts() as $product) {
+				$option_data = array();
+
+				foreach ($product['option'] as $option) {
+					$option_data[] = array(
+						'product_option_id'       => $option['product_option_id'],
+						'product_option_value_id' => $option['product_option_value_id'],
+						'option_id'               => $option['option_id'],
+						'option_value_id'         => $option['option_value_id'],
+						'name'                    => $option['name'],
+						'value'                   => $option['value'],
+						'type'                    => $option['type']
+					);
+				}
+
+				$order_data['products'][] = array(
+					'product_id' => $product['product_id'],
+					'name'       => $product['name'],
+					'model'      => $product['model'],
+					'option'     => $option_data,
+					'download'   => $product['download'],
+					'quantity'   => $product['quantity'],
+					'subtract'   => $product['subtract'],
+					'price'      => $product['price'],
+					'total'      => $product['total'],
+					'tax'        => $this->tax->getTax($product['price'], $product['tax_class_id']),
+					'reward'     => $product['reward']
+				);
+			}
+		return $order_data;
 	}
 	protected function validate() {
 		$this->load->language('payment/webpos');

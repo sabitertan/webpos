@@ -127,6 +127,11 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_boa_classic_url']      = $this->language->get('entry_boa_classic_url');
 		$data['entry_boa_3D_url']         = $this->language->get('entry_boa_3D_url');
 		//
+		//PAYU
+		$data['entry_payu_merchant_id']        = $this->language->get('entry_payu_merchant_id');
+		$data['entry_payu_secret_key']        = $this->language->get('entry_payu_secret_key');
+		$data['entry_payu_alu_url']     = $this->language->get('entry_payu_alu_url');
+		//
 		$this->load->model('extension/webposbuilder');
 		$banks=$this->model_extension_webposbuilder->getbanks(array('sort'=>'bank_id'));
 		//fix key sort order

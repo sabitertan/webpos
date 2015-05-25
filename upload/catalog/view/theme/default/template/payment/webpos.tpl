@@ -81,6 +81,9 @@ $('#button-confirm').bind('click', function() {
 			if (json['redirect']) {
 				location = json['redirect'];
 			}
+			if (json['payu3d']) {
+				location = json['payu3d'][0];
+			}
 		}
 	});
 });
