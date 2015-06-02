@@ -177,10 +177,13 @@ class ControllerPaymentWebpos extends Controller {
 			$webpos_bank['customer_ip']=$this->request->server['REMOTE_ADDR'];
 			
 			$webpos_bank['instalment']=$instalment;
-			
+			if ($this->request->server['HTTPS']) {
 			$webpos_bank['success_url']=$this->url->link('payment/webpos/callback', '', 'SSL'); //bank will return here if payment successfully finishes;
 			$webpos_bank['fail_url']=$this->url->link('payment/webpos/callback', '', 'SSL'); //bank will return here if payment fails;
-			
+			} else {
+			$webpos_bank['success_url']=$this->url->link('payment/webpos/callback'); //bank will return here if payment successfully finishes;
+			$webpos_bank['fail_url']=$this->url->link('payment/webpos/callback'); //bank will return here if payment fails;	
+			}
 			$webpos_bank['order_id']=$this->session->data['order_id']; //unique order id 
 			$webpos_bank['total']=$this->currency->format($order_info['total'], $order_info['currency_code'], false, false);//total order amount
 			$webpos_bank['mode']=$this->config->get('webpos_mode');
