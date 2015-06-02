@@ -43,6 +43,12 @@ class nestpay3DHosting {
 		'currency'=>"949",
 		'firmaadi'=>$bank['nestpay_3D_storename'],
 		'refreshtime'=>"10",
+		'Fismi'=>$bank['order_info']['firstname'] . ' ' . $bank['order_info']['lastname'],
+		'Fadres'=>$bank['order_info']['shipping_address_1'],
+		'Fadres2'=>$bank['order_info']['shipping_address_2'],
+		'Fil'=>$bank['order_info']['shipping_zone'],
+		'Filce'=>$bank['order_info']['shipping_city'],
+		'fulkekod'=>$bank['order_info']['shipping_iso_code_2'],
 		'bank_id'=>$bank['bank_id']
 		);
 		$action='';
