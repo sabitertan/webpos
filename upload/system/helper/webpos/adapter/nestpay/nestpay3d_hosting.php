@@ -41,6 +41,8 @@ class nestpay3DHosting {
 		'storetype'=>"3d_pay_hosting",
 		'lang'=>"tr",
 		'currency'=>"949",
+		'firmaadi'=>$bank['nestpay_3D_storename'],
+		'refreshtime'=>"10",
 		'bank_id'=>$bank['bank_id']
 		);
 		$action='';
