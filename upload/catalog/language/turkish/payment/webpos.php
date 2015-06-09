@@ -13,6 +13,7 @@ $_['text_no_instalment']   = ' Tek Çekim(Tüm Bankalar) : ';
 $_['text_3d_hosting']   = ' "Siparişi Onayla" tuşuna bastıktan sonra yönlendirileceğiniz banka Güvenli Ödeme Sayfasında Kredi kartı bilgilerinizi girerek siparişinizi tamamlayacaksınız. Ödeme işlemi tamamlanana kadar tarayıcınızı kapatmayınız.';
 $_['text_single_positive'] = 'Tek Çekim Komisyonu';
 $_['text_single_negative'] = 'Tek Çekim İndirimi';
+$_['text_no_commision'] = 'Sıfır Komisyon';
 
 $_['text_response']     = 'Ödeme İşlemi Sonucu:';
 $_['text_success']      = '... ödeme işlemi başarıyla gerçekleştirildi.';

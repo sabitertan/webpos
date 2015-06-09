@@ -77,10 +77,12 @@ class ControllerPaymentWebpos extends Controller {
 		$order_total = $this->cart->getTotal();
 		$webpos_single_ratio=floatval($this->config->get('webpostotal_single_ratio'));
 		//
-		if ($webpos_single_ratio>=0){
+		if ($webpos_single_ratio>0){
 			$webpos_single_title=$this->language->get('text_single_positive').'(%'.$webpos_single_ratio.')';
 		} else if($webpos_single_ratio<0){
 			$webpos_single_title=$this->language->get('text_single_negative').'(%'.$webpos_single_ratio.')';
+		} else {
+			$webpos_single_title=$this->language->get('text_no_commision').'(%'.$webpos_single_ratio.')';
 		}
 		$webpos_total=$order_total+($order_total*$webpos_single_ratio/100);
 		//

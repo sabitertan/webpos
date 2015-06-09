@@ -1,5 +1,5 @@
 <?php
-// Türkçe ye Çeviri : www.tr-opencart.com
+//Heading
 $_['heading_title']     = 'Thank you shopping with %s . ';
 
 
@@ -13,6 +13,7 @@ $_['text_no_instalment']   = ' No instalment : ';
 $_['text_3d_hosting']   = ' Redirecting to bank payment system please wait.';
 $_['text_single_positive'] = 'Commission';
 $_['text_single_negative'] = 'Discount';
+$_['text_no_commision'] = 'No Commission';
 
 $_['text_response']     = 'Payment Process Result:';
 $_['text_success']      = '... payment process has been successfully finished.';

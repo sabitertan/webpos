@@ -66,7 +66,7 @@ class ControllerTotalWebposTotal extends Controller {
 		if (isset($this->request->post['webpostotal_sort_order'])) {
 			$data['webpostotal_sort_order'] = $this->request->post['webpostotal_sort_order'];
 		} else {
-			$data['webpostotal_sort_order'] = $this->config->get('webpostotal_sort_order');
+			$data['webpostotal_sort_order'] = $this->config->get('total_sort_order')+1;
 		}
 		if (isset($this->request->post['webpostotal_single_ratio'])) {
 			$data['webpostotal_single_ratio'] = $this->request->post['webpostotal_single_ratio'];
