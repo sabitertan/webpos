@@ -109,7 +109,7 @@ class nestpay3DModel {
 				);
 				//field
 				$xml_response=$this->xmlSend($xml_fields);
-				$xml = simplexml_load_string($xmlstring);
+				$xml = simplexml_load_string($xml_response);
 				
 				$Response=isset($xml->Response)?(string)$xml->Response:'';
 				$OrderId=isset($xml->OrderId)?(string)$xml->OrderId:'';
