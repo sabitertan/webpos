@@ -66,7 +66,50 @@ class ControllerPaymentWebpos extends Controller {
 		
 		return $query->row;
 	}
+	public function getTotal() {
+		$order_total=0;
+		$order_data = array();
 
+			$order_data['totals'] = array();
+			$total = 0;
+			$taxes = $this->cart->getTaxes();
+
+			$this->load->model('extension/extension');
+
+			$sort_order = array();
+
+			$results = $this->model_extension_extension->getExtensions('total');
+
+			foreach ($results as $key => $value) {
+				$sort_order[$key] = $this->config->get($value['code'] . '_sort_order');
+			}
+
+			array_multisort($sort_order, SORT_ASC, $results);
+
+			foreach ($results as $result) {
+				if ($this->config->get($result['code'] . '_status')) {
+					$this->load->model('total/' . $result['code']);
+
+					$this->{'model_total_' . $result['code']}->getTotal($order_data['totals'], $total, $taxes);
+				}
+			}
+
+			$sort_order = array();
+
+			foreach ($order_data['totals'] as $key => $value) {
+				$sort_order[$key] = $value['sort_order'];
+			}
+
+			array_multisort($sort_order, SORT_ASC, $order_data['totals']);
+			
+			foreach ($order_data['totals'] as $total) {
+				
+				if($total['code']=='total'){
+					$order_total=$total['value'];
+				}
+			}
+			return $order_total;
+	}
 	public function instalments() {
 		$this->load->language('payment/webpos');
 		$data['text_instalments']=$this->language->get('text_instalments');
@@ -74,7 +117,8 @@ class ControllerPaymentWebpos extends Controller {
 		$data['text_no_instalment']=$this->language->get('text_no_instalment');
 		$data['webpos_other_id']=$this->config->get('webpos_other_id');
 		$this->load->model('checkout/order');
-		$order_total = $this->cart->getTotal();
+		//$order_total = $this->cart->getTotal();
+		$order_total = $this->getTotal();
 		$webpos_single_ratio=floatval($this->config->get('webpostotal_single_ratio'));
 		//
 		if ($webpos_single_ratio>0){
