@@ -59,8 +59,13 @@ $_['entry_boa_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 $_['entry_payu_merchant_id']     = 'İşyeri İsmi(Merchant ID):';
 $_['entry_payu_secret_key']    = 'İşyeri Anahtarı(Secret Key):';
 $_['entry_payu_alu_url']      = 'Ödeme Bağlantısı(ALU URL):';
+
+//ipara
+$_['entry_ipara_public_key']     = 'Genel anahtar:';
+$_['entry_ipara_private_key']    = 'Özel anahtar:';
 //Tabs
 $_['tab_general']              = 'Genel';
+$_['tab_add']              = 'Banka Ekle';
 // Entry
 
 $_['entry_mode']                = 'Ödeme Modu:';

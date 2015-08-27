@@ -132,6 +132,10 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_payu_secret_key']        = $this->language->get('entry_payu_secret_key');
 		$data['entry_payu_alu_url']     = $this->language->get('entry_payu_alu_url');
 		//
+		//ipara
+		$data['entry_ipara_public_key']        = $this->language->get('entry_ipara_public_key');
+		$data['entry_ipara_private_key']        = $this->language->get('entry_ipara_private_key');
+		//
 		$this->load->model('extension/webposbuilder');
 		$banks=$this->model_extension_webposbuilder->getbanks(array('sort'=>'bank_id'));
 		//fix key sort order
