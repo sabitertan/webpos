@@ -299,7 +299,8 @@ class ControllerPaymentWebpos extends Controller {
 		}
 		//load method.model class
 		$this->helperload($webpos_class);
-		
+		$webpos_bank['order_info'] = $this->model_checkout_order->getOrder($order_id);
+		$webpos_bank['products']=$this->getOrderProducts();
 		$method_response=array();
 		$method_response=$this->{'webpos_'.$webpos_bank['method'].$webpos_bank['model']}->bankResponse($bank_response,$webpos_bank);
 		if ($method_response['result']==1){
