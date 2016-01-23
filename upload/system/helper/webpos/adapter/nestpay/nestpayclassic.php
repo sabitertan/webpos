@@ -21,7 +21,7 @@ class nestpayClassic {
 		'cardType'=>$bank['cc_type'],
 		'ip' => $bank['customer_ip'],
 		'tutar' => $bank['total'],
-		'taksit' => $bank['taksit'],	
+		'taksit' => $bank['instalment'],	
 		'oid' => $bank['order_id'],
 		'email' => ''
 		);
@@ -36,7 +36,7 @@ class nestpayClassic {
 		$ErrMsg=isset($xml->ErrMsg)?(string)$xml->ErrMsg:'';
 		$HostRefNum=isset($xml->HostRefNum)?(string)$xml->HostRefNum:'';
 		$TransId=isset($xml->TransId)?(string)$xml->TransId:'';
-		
+		$response['message'] = '';
 		if($ProcReturnCode =="00" || $Response === "Approved") {
 			$response['result']=1;
 			$response['message'].='Ödeme Başarılı<br/>';
