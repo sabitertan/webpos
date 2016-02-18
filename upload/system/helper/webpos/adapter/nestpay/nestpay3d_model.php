@@ -36,8 +36,6 @@ class nestpay3DModel {
 		'failUrl'=>$failUrl,
 		'rnd'=>$rnd,
 		'hash'=>$hash,
-		'islemtipi'=>"Auth",
-		'taksit'=>$taksit,
 		'storetype'=>"3d",
 		'lang'=>"tr",
 		'currency'=>"949",
