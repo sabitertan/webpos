@@ -96,7 +96,18 @@ class ControllerPaymentWebPos extends Controller {
 		$data['entry_nestpay_classic_url']=  $this->language->get('entry_nestpay_classic_url');
 		$data['entry_nestpay_3D_url']=   $this->language->get('entry_nestpay_3D_url');
 
-		
+
+		// VAKIF
+		$data['entry_get724_client_id']=  $this->language->get('entry_get724_client_id');
+		$data['entry_get724_classic_name']=  $this->language->get('entry_get724_classic_name');
+		$data['entry_get724_classic_password']=   $this->language->get('entry_get724_classic_password');
+		$data['entry_get724_3D_storekey']=   $this->language->get('entry_get724_3D_storekey');
+		$data['entry_get724_3D_storename']=   $this->language->get('entry_get724_3D_storename');
+		$data['entry_get724_test_url']=   $this->language->get('entry_get724_test_url');
+		$data['entry_get724_classic_url']=  $this->language->get('entry_get724_classic_url');
+		$data['entry_get724_3D_url']=   $this->language->get('entry_get724_3D_url');
+
+
 		//GVP
 		$data['entry_gvp_terminal_id']=   $this->language->get('entry_gvp_terminal_id');
 		$data['entry_gvp_merchant_id']=   $this->language->get('entry_gvp_merchant_id');

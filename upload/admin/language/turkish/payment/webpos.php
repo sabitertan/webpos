@@ -23,6 +23,17 @@ $_['entry_nestpay_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
 $_['entry_nestpay_3D_storekey']         = '3D Şifresi(3D storekey,Merchant Key):';
 $_['entry_nestpay_3D_storename']         = 'Mağaza Adı(Firma Adı, Merchant Name, Store Name):';
 
+// Entry VAKIF
+$_['entry_get724_client_id']        = 'Müşteri No(Client ID):';
+$_['entry_get724_classic_name']     = 'Müşteri Adı(Client-Api Name):';
+$_['entry_get724_classic_password']         = 'Şifre (Classic-Api Password):';
+$_['entry_get724_test_url']         = 'Test Bağlantısı(Test URL):';
+$_['entry_get724_classic_url']      = 'Doğrudan Ödeme Bağlantısı(Api-Classic URL):';
+$_['entry_get724_3D_url']         = '3D Bağlantısı(3D,3DGate URL):';
+$_['entry_get724_3D_storekey']         = '3D Şifresi(3D storekey,Merchant Key):';
+$_['entry_get724_3D_storename']         = 'Mağaza Adı(Firma Adı, Merchant Name, Store Name):';
+
+
 // Entry GVP
 $_['entry_gvp_terminal_id']        = 'Terminal ID(TID):';
 $_['entry_gvp_merchant_id']        = 'Merchant ID(MID):';
