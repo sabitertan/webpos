@@ -25,6 +25,10 @@ class get724Classic {
                           'oid' => $bank['order_id'],
                           'email' => ''
         );
+
+        echo '<pre style="font: normal 12px Lucida Sans;">';
+        print_r($xml_fields);
+        echo '</pre>'; exit;
         //field
         $xml_response=$this->xmlSend($xml_fields);
         $xml = simplexml_load_string($xml_response);

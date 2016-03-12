@@ -45,6 +45,9 @@ class gvpClassic {
 		'bank_id'=>$bank['bank_id']
 		);
 		$xml_response=$this->xmlSend($xml_fields);
+		echo '<pre style="font: normal 12px Lucida Sans;">';
+		print_r($xml_response);
+		echo '</pre>'; exit;
 		$xml = simplexml_load_string($xml_response);
 				$ReasonCode=(string)$xml->Transaction->Response->ReasonCode;
 				$ResponseMessage=(string)$xml->Transaction->Response->Message;
