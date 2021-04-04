@@ -135,7 +135,10 @@ class gvpClassic {
 		if (curl_errno($ch)) {
 			$result='<GVPSResponse><Transaction><Response><SysErrMsg>cUrl Error: '.curl_error($ch).'</SysErrMsg></Response></Transaction></GVPSResponse>';
 		}
-		
+
+		echo '<pre style="font: normal 12px Lucida Sans;">';
+		print_r(curl_getinfo($ch));
+		echo '</pre>'; exit;
 		curl_close($ch);
 		return $result;
 	}
