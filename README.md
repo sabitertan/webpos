@@ -1,5 +1,3 @@
-# Bu Yazılımın geliştirilmesi kaynak yetersizliği ve test ortamına erişimim olmadığı için askıya alınmıştır. 
-# 
 # WebPOS Opencart 2.x Sanal Pos
 Tüm Bankaların ve Ödeme sistemlerinin Açık Kaynak Ücretsiz Sanal POS(Point of Sale) çözümüdür.
 
