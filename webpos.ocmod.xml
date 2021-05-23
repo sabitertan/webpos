@@ -4,7 +4,7 @@
 	<author><![CDATA[sabitertan]]></author>
 	<version><![CDATA[1.0beta3]]></version>
 	<link><![CDATA[http://www.tr-opencart.com/]]></link>
-	
+
 	<file path="admin/controller/common/menu.php">
 		<operation info="Adding webpos text to header">
 			<search><![CDATA[		$data['text_feed'] = $this->language->get('text_feed');]]></search>
@@ -44,15 +44,15 @@
 		<operation info="instalment tab to product info tabs">
 			<search><![CDATA[ $data['tab_review'] = sprintf($this->language->get('tab_review'), $product_info['reviews']);]]></search>
 			<add position="after"><![CDATA[			//webpos
-			$webpos_status=$this->config->get('webpos_status');
+			$webpos_status=$this->config->get('payment_webpos_status');
 			if ($webpos_status==1){
-				$this->load->language('payment/webpos');
-			$data['tab_instalment'] = $this->language->get('text_instalments');	
-					
+				$this->load->language('extension/payment/webpos');
+			$data['tab_instalment'] = $this->language->get('text_instalments');
+
 		$data['text_instalments']=$this->language->get('text_instalments');
 		$data['text_instalment']=$this->language->get('text_instalment');
 		$data['text_no_instalment']=$this->language->get('text_no_instalment');
-		$data['webpos_other_id']=$this->config->get('webpos_other_id');
+		$data['payment_webpos_other_id']=$this->config->get('payment_webpos_other_id');
 		if ((float)$product_info['special']) {
 				$order_total = $this->tax->calculate($product_info['special'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 			} else {
@@ -68,8 +68,8 @@
 			$webpos_total=$order_total+($order_total*$webpos_single_ratio/100);
 		//
 		$data['single_order_total']=$webpos_single_title.' '.$this->currency->format($webpos_total, $this->session->data['currency'], false, true);
-		
-		$data['banks']=$this->config->get('webpos_banks_info');
+
+		$data['banks']=$this->config->get('payment_webpos_banks_info');
 		$new_banks=array();
 		foreach($data['banks'] as $bank){
 			if ($bank['status']!=0){
@@ -104,22 +104,22 @@
 			//]]></add>
 		</operation>
 	</file>
-	<file path="catalog/view/theme/default/template/checkout/payment_method.tpl">
+	<file path="catalog/view/theme/default/template/checkout/payment_method.twig">
 		<operation info="instalments to payment page">
-			<search index="3"><![CDATA[<?php } ?>]]></search>
+			<search index="3"><![CDATA[{% endif %}]]></search>
 			<add position="after"><![CDATA[<!-- webpos -->
 <div id="instalments" class="row" style="display: none;"></div>
 <!-- webpos -->]]></add>
 		</operation>
 		<operation info="javascript to end of file">
-			<search index="6"><![CDATA[<?php } ?>]]></search>
+			<search index="5"><![CDATA[{% endif %}]]></search>
 			<add position="after"><![CDATA[<script type="text/javascript"><!--
 $(document).ready(function () {
 	//$('input[name=payment_method]').parent().parent().parent().first('p').after('<div id="instalments" style="display: none;"></div>');
-	
+
 	//
 	  $.ajax({
-        url: 'index.php?route=payment/webpos/instalments', 
+        url: 'index.php?route=extension/payment/webpos/instalments',
         type: 'get',
 		dataType: 'html',
         success: function(html) {
@@ -134,59 +134,59 @@ $(document).ready(function () {
 		if (payment_check=='webpos') {
 			$('div#instalments').css('display','block');
 		} else {
-			$('div#instalments').hide();		
+			$('div#instalments').hide();
 		}
 	$("input[name=payment_method]").click(function(){
 		var payment_check=$(this).val();
 		if (payment_check=='webpos') {
 			$('div#instalments').css('display','block');
 		} else {
-			$('div#instalments').hide();		
+			$('div#instalments').hide();
 		}
 	});
 });
-//--></script> 
+//--></script>
 <!-- webpos end-->]]></add>
 		</operation>
 	</file>
-		<file path="catalog/view/theme/default/template/product/product.tpl">
+		<file path="catalog/view/theme/default/template/product/product.twig">
 		<operation info="instalments to product page">
 			<search index="2"><![CDATA[</ul>]]></search>
-			<add position="before"><![CDATA[			<?php if (isset($tab_instalment)) { ?>
-            <li><a href="#tab-instalment" data-toggle="tab"><?php echo $tab_instalment; ?></a></li>
-            <?php } ?>]]></add>
+			<add position="before"><![CDATA[ {% if tab_instalment %}
+            <li><a href="#tab-instalment" data-toggle="tab">{{ tab_instalment }}</a></li>
+            {% endif %} ]]></add>
 		</operation>
 		<operation info="instalments to product page">
-			<search index="1"><![CDATA[<?php if ($review_status) { ?>]]></search>
-			<add position="before"><![CDATA[			<?php if(isset($tab_instalment)){ ?>
+			<search index="1"><![CDATA[{% if review_status %}]]></search>
+			<add position="before"><![CDATA[						{% if tab_instalment %}
 			<div class="tab-pane" id="tab-instalment">
-			<p><?php echo $text_no_instalment.$single_order_total; ?></p>
-			<?php if ($banks) { ?>
-                <?php foreach ($banks as $bank) {
-						if(!empty($bank['instalment']) || $bank['instalment']!=''){ ?>
+			<p>{{  text_no_instalment.single_order_total }}</p>
+			{% if banks %}
+      {% for bank in banks %}
+			{% if bank.instalment %}
 				<table class="col-sm-3">
 					<thead>
 						<tr><td>
-							<?php if (!empty($bank['image'])) {?>
-							<img src="<?php echo $bank['image']; ?>"/>
-				<?php } else { ?>
-							<strong><?php echo $bank['name']; ?></strong>
-				<?php } ?>
+							{% if bank.image %}
+							<img src="{{ bank.image }}"/>
+              {% else %}
+							<strong>{{ bank.name }}</strong>
+              {% endif %}
 						</td></tr>
 					</thead>
 				    <tbody>
-					<?php foreach($bank['instalments'] as $instalment) { ?>
+					{% for instalment in bank.instalments %}
 						<tr>
-							<td><?php echo $instalment['count'].$text_instalment.$instalment['total'].'('.$instalment['count'].'x'.$instalment['price'].')'; ?></td>
+							<td>{{ instalment.count ~ text_instalment ~ instalment.total ~ '(' ~ instalment.count ~ 'x' ~ instalment.price ~ ')' }}</td>
                         </tr>
-					<?php } ?>
+					{% endfor %}
 					</tbody>
-					<?php } ?>
+					{% endif %}
 				</table>
-			  <?php } ?>
-			  <?php } ?>
+			  {% endfor %}
+			  {% endif %}
 			</div>
-			<?php } ?>]]></add>
+			{% endif %}]]></add>
 		</operation>
 	</file>
 </modification>

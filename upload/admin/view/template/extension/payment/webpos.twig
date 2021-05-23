@@ -1,0 +1,172 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-webpos" data-toggle="tooltip" title="{{ button_save }}"
+          class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default">
+        <i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-webpos" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            {% for tab_bank in banks %}
+            <li><a href="#tab-bank-{{ tab_bank.bank_id }}" data-toggle="tab">
+                {% if tab_bank.image %}
+                <img src="{{ tab_bank.image }}" />
+                {% else %}
+                {{ tab_bank.name }}
+                {% endif %}
+              </a></li>
+            {% endfor %}
+            <li><a href="{{ tab_add_url }}">{{ tab_add }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active in" id="tab-general">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mode">{{ entry_mode }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_webpos_mode" id="input-mode" class="form-control">
+                    {% if payment_webpos_mode == 'live' %}
+                    <option value="live" selected="selected">{{ text_live }}</option>
+                    {% else %}
+                    <option value="live">{{ text_live }}</option>
+                    {% endif %}
+                    {% if payment_webpos_mode == 'test' %}
+                    <option value="test" selected="selected">{{ text_test }}</option>
+                    {% else %}
+                    <option value="test">{{ text_test }}</option>
+                    {% endif %}
+                    {% if payment_webpos_mode == 'debug' %}
+                    <option value="debug" selected="selected">{{ text_debug }}</option>
+                    {% else %}
+                    <option value="debug">{{ text_debug }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-other">{{ entry_other }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_webpos_other_id" id="input-other" class="form-control">
+                    {% for bank in banks %}
+                    {% if bank.bank_id == payment_webpos_other_id %}
+                    <option value="{{ bank.bank_id }}" selected="selected">{{ bank.name }}</option>
+                    {% else %}
+                    <option value="{{ bank.bank_id }}">{{ bank.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-total"><span data-toggle="tooltip"
+                    title="{{ help_total }}">{{ entry_total }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_webpos_total" value="{{ payment_webpos_total }}" placeholder="{{ entry_total }}"
+                    id="input-total" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-order-status">{{ entry_order_status }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_webpos_order_status_id" id="input-order-status" class="form-control">
+                    {% for order_status in order_statuses %}
+                    {% if order_status.order_status_id == payment_webpos_order_status_id %}
+                    <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}
+                    </option>
+                    {% else %}
+                    <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-geo-zone">{{ entry_geo_zone }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_webpos_geo_zone_id" id="input-geo-zone" class="form-control">
+                    <option value="0">{{ text_all_zones }}</option>
+                    {% for geo_zone in geo_zones %}
+                    {% if geo_zone.geo_zone_id == payment_webpos_geo_zone_id %}
+                    <option value="{{ geo_zone.geo_zone_id }}" selected="selected">{{ geo_zone.name }}</option>
+                    {% else %}
+                    <option value="{{ geo_zone.geo_zone_id }}">{{ geo_zone.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="payment_webpos_status" id="input-status" class="form-control">
+                    {% if payment_webpos_status %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_webpos_sort_order" value="{{ payment_webpos_sort_order }}"
+                    placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <!-- banks start-->
+            {% for tab_bank in banks %}
+            <div class="tab-pane" id="tab-bank-{{ tab_bank.bank_id }}">
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][bank_id]"
+                value="{{ tab_bank.bank_id }}" />
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][name]" value="{{ tab_bank.name }}" />
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][image]" value="{{ tab_bank.image }}" />
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][method]" value="{{ tab_bank.method }}" />
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][model]" value="{{ tab_bank.model }}" />
+              <input type="hidden" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][status]" value="{{ tab_bank.status }}" />
+              {{ tab_bank.name ~ ' , ' ~ tab_bank.method ~ ' , ' ~ tab_bank. model ~ ' , ' ~ tab_bank.status }}
+
+              {% for entry, value in tab_bank.entries %}
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-{{ entry }}">{{ _context['entry_' ~ entry] }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="payment_webpos_banks_info[{{ tab_bank.bank_id }}][{{ entry }}]" value="{{ value }}"
+                    placeholder="{{ entry }}" id="input-{{ entry }}" class="form-control" />
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            {% endfor %}
+
+            <!-- banks end-->
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

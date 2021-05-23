@@ -1,0 +1,33 @@
+{% if banks %}
+<div class="col-sm-12">
+    <div class="radio">
+        <label>
+            <input type="radio" name="instalment" value="{{ webpos_other_id ~ '_0x' ~ single_order_total }}"
+                checked="checked" />
+            {{ text_no_instalment ~ webpos_single_title ~ single_order_total }}
+        </label>
+    </div>
+    <h3>{{ text_instalments }}</h3>
+</div>
+{% for bank in banks %}
+    {% if bank.instalment %}
+    <div class="col-sm-3">
+        {% if bank.image %}
+        <img src="{{ bank['image'] }}" />
+        {% else %}
+        <strong>{{ bank.name }}</strong>
+        {% endif %}
+        {% for instalment in bank.instalments %}
+        <div class="radio">
+            <label>
+                <input type="radio" name="instalment"
+                    value="{{ bank.bank_id ~ '_' ~ instalment.count ~ 'x' ~ instalment.price ~ '_' ~ instalment.ratio }}" />
+                {{ instalment.count ~ text_instalment ~ instalment.total ~ '(' ~ instalment.count ~ 'x' ~ instalment.price ~ ')' }}
+            </label>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+{% endfor %}
+{% endif %}

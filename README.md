@@ -1,4 +1,4 @@
-# WebPOS Opencart 2.x Sanal Pos
+# WebPOS Opencart 3.x Sanal Pos
 Tüm Bankaların ve Ödeme sistemlerinin Açık Kaynak Ücretsiz Sanal POS(Point of Sale) çözümüdür.
 
 Desteklenen Yöntemler
@@ -9,6 +9,7 @@ Yapı Kredi Posnet(posnet),
 KuveytTürk FreePos(boa),
 İPara(ipara),
 PAYU(Payu)
+Vakıfbank
 
 Model Tanımları
 ---------------
