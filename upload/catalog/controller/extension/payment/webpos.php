@@ -116,7 +116,7 @@ class ControllerExtensionPaymentWebpos extends Controller {
 		$this->load->model('checkout/order');
 		//$order_total = $this->cart->getTotal();
 		$order_total = $this->getTotal();
-		$webpos_single_ratio=floatval($this->config->get('webpostotal_single_ratio'));
+		$webpos_single_ratio=floatval($this->config->get('total_webpostotal_single_ratio'));
 		//
 		if ($webpos_single_ratio>0){
 			$webpos_single_title=$this->language->get('text_single_positive').'(%'.$webpos_single_ratio.')';

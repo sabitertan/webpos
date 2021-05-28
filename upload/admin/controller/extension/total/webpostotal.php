@@ -10,7 +10,7 @@ class ControllerExtensionTotalWebposTotal extends Controller {
 		$this->load->model('setting/setting');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting('webpostotal', $this->request->post);
+			$this->model_setting_setting->editSetting('total_webpostotal', $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 
@@ -57,21 +57,21 @@ class ControllerExtensionTotalWebposTotal extends Controller {
 
 		$data['cancel'] = $this->url->link('marketplace/extension', 'user_token=' . $this->session->data['user_token'], true);
 
-		if (isset($this->request->post['webpostotal_status'])) {
-			$data['webpostotal_status'] = $this->request->post['webpostotal_status'];
+		if (isset($this->request->post['total_webpostotal_status'])) {
+			$data['total_webpostotal_status'] = $this->request->post['total_webpostotal_status'];
 		} else {
-			$data['webpostotal_status'] = $this->config->get('webpostotal_status');
+			$data['total_webpostotal_status'] = $this->config->get('total_webpostotal_status');
 		}
 
-		if (isset($this->request->post['webpostotal_sort_order'])) {
-			$data['webpostotal_sort_order'] = $this->request->post['webpostotal_sort_order'];
+		if (isset($this->request->post['total_webpostotal_sort_order'])) {
+			$data['total_webpostotal_sort_order'] = $this->request->post['total_webpostotal_sort_order'];
 		} else {
-			$data['webpostotal_sort_order'] = $this->config->get('total_sort_order')+1;
+			$data['total_webpostotal_sort_order'] = $this->config->get('total_sort_order')+1;
 		}
-		if (isset($this->request->post['webpostotal_single_ratio'])) {
-			$data['webpostotal_single_ratio'] = $this->request->post['webpostotal_single_ratio'];
+		if (isset($this->request->post['total_webpostotal_single_ratio'])) {
+			$data['total_webpostotal_single_ratio'] = $this->request->post['total_webpostotal_single_ratio'];
 		} else {
-			$data['webpostotal_single_ratio'] = $this->config->get('webpostotal_single_ratio');
+			$data['total_webpostotal_single_ratio'] = $this->config->get('total_webpostotal_single_ratio');
 		}
 
 		$data['header'] = $this->load->controller('common/header');

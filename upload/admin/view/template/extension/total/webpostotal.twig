@@ -28,8 +28,8 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
             <div class="col-sm-10">
-              <select name="webpostotal_status" id="input-status" class="form-control">
-                {% if webpostotal_status %}
+              <select name="total_webpostotal_status" id="input-status" class="form-control">
+                {% if total_webpostotal_status %}
                 <option value="1" selected="selected">{{ text_enabled }}</option>
                 <option value="0">{{ text_disabled }}</option>
                 {% else %}
@@ -42,13 +42,13 @@
           <div class="form-group">
             <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
             <div class="col-sm-10">
-              <input type="text" name="webpostotal_sort_order" value="{{ webpostotal_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" readonly="readonly" class="form-control" />
+              <input type="text" name="total_webpostotal_sort_order" value="{{ total_webpostotal_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" readonly="readonly" class="form-control" />
             </div>
           </div>
 		  <div class="form-group">
             <label class="col-sm-2 control-label" for="input-single-ratio">{{ entry_single_ratio }}</label>
             <div class="col-sm-10">
-              <input type="text" name="webpostotal_single_ratio" value="{{ webpostotal_single_ratio }}" placeholder="0.00" id="input-single-ratio" class="form-control" />
+              <input type="text" name="total_webpostotal_single_ratio" value="{{ total_webpostotal_single_ratio }}" placeholder="0.00" id="input-single-ratio" class="form-control" />
             </div>
           </div>
         </form>

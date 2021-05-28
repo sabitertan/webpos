@@ -10,7 +10,7 @@ class ModelExtensionTotalWebposTotal extends Model {
 			$instalment = intval( $instalment_array[0] );
 			$instalment_array[1] = str_replace( ',', '', $instalment_array[1] );
 			$price = $total['total'];
-			$ratio = floatval( $this->config->get('webpostotal_single_ratio') );
+			$ratio = floatval( $this->config->get('total_webpostotal_single_ratio') );
 			if ( $instalment != 0 ) {
 				$webpos_total = ( $price * $bank_array[2] ) / 100;
 				$webpos_title = $this->language->get('text_total') . '(' . $instalment . 'x' . $this->currency->format((float)(($price+$webpos_total)/$instalment)).')';

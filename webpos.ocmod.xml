@@ -58,7 +58,7 @@
 			} else {
 				$order_total = $this->tax->calculate($product_info['price'], $product_info['tax_class_id'], $this->config->get('config_tax'));
 			}
-		$webpos_single_ratio=floatval($this->config->get('webpostotal_single_ratio'));
+		$webpos_single_ratio=floatval($this->config->get('total_webpostotal_single_ratio'));
 		//
 			if ($webpos_single_ratio>=0){
 				$webpos_single_title=$this->language->get('text_single_positive').'(%'.$webpos_single_ratio.')';
