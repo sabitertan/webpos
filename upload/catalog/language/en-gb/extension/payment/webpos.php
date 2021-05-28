@@ -1,36 +1,35 @@
 <?php
-// Türkçe ye Çeviri : www.tr-opencart.com
-$_['heading_title']     = '%s ile alışverişi tercih etttiğiniz için teşekkürler. ';
+//Heading
+$_['heading_title']     = 'Thank you shopping with %s . ';
 
 
 // Text
-$_['text_title']           = 'Kredi Kartı (Webpos)';
-$_['text_credit_card']     = 'Kredi Kartı Detayları';
-$_['text_wait']            = 'Lütfen Bekleyiniz!';
-$_['text_instalments']     = 'Taksitler';
-$_['text_instalment']      = ' Taksit ';
-$_['text_no_instalment']   = ' Tek Çekim(Tüm Bankalar) : ';
-$_['text_3d_hosting']   = ' "Siparişi Onayla" tuşuna bastıktan sonra yönlendirileceğiniz banka Güvenli Ödeme Sayfasında Kredi kartı bilgilerinizi girerek siparişinizi tamamlayacaksınız. Ödeme işlemi tamamlanana kadar tarayıcınızı kapatmayınız.';
-$_['text_single_positive'] = 'Tek Çekim Komisyonu';
-$_['text_single_negative'] = 'Tek Çekim İndirimi';
-$_['text_no_commision'] = 'Sıfır Komisyon';
+$_['text_title']           = 'Credit Card';
+$_['text_credit_card']     = 'Credit Card Info';
+$_['text_wait']            = 'Plase wait!';
+$_['text_instalments']     = 'Instalments';
+$_['text_instalment']      = ' Instalment ';
+$_['text_no_instalment']   = ' No instalment : ';
+$_['text_3d_hosting']   = ' Redirecting to bank payment system please wait.';
+$_['text_single_positive'] = 'Commission';
+$_['text_single_negative'] = 'Discount';
+$_['text_no_commision'] = 'No Commission';
 
-$_['text_response']     = 'Ödeme İşlemi Sonucu:';
-$_['text_success']      = '... ödeme işlemi başarıyla gerçekleştirildi.';
-$_['text_success_wait'] = '<b><span style="color: #FF0000">Lütfen Bekleyiniz...</span></b> siparişiniz işleniyor.<br>tarayıcınız 10 saniye içinde sonuç sayfasına yönlendirilmezse <a href="%s">burayı tıklayın</a>.';
+$_['text_response']     = 'Payment Process Result:';
+$_['text_success']      = '... payment process has been successfully finished.';
+$_['text_success_wait'] = '<b><span style="color: #FF0000">Please wait...</span></b> your order is being processed.<br>if your browser does not redirect to result page in 10 seconds <a href="%s">click here</a>.';
 $_['text_failure']      = '... ödeme işlemi başarısız!';
-$_['text_failure_wait'] = '<b><span style="color: #FF0000">Lütfen Bekleyiniz...</span></b><br>tarayıcınız 10 saniye içinde ödeme sayfasına yönlendirilmezse <a href="%s">burayı tıklayın</a>.';
+$_['text_failure_wait'] = '<b><span style="color: #FF0000">Please wait...</span></b><br>if your browser does not redirect to result page in 10 seconds <a href="%s">click here</a>.';
 // Entry
-$_['entry_cc_owner']       = 'Kart Sahibi:';
-$_['entry_cc_number']      = 'Kart Numarası:';
-$_['entry_cc_expire_date'] = 'Geçerlilik Tarihi - Kart Tipi:';
-$_['entry_cc_cvv2']        = 'Güvenlik Kodu (CVV2):';
+$_['entry_cc_owner']       = 'Card Holder:';
+$_['entry_cc_number']      = 'Number:';
+$_['entry_cc_expire_date'] = 'Expiration Date - Card Type:';
+$_['entry_cc_cvv2']        = 'Security Code (CVV2):';
 
 //Error
-$_['error_fix']       = 'Lütfen Aşağıdaki Hataları Düzeltiniz:';
-$_['error_cc_owner']  = 'Kart Sahibi boş bırakılamaz';
-$_['error_cc_number'] = 'Kart Numarası Geçerli Uzunlukta Değil';
-$_['error_cc_cvv2']   = 'Güvenlik Kodu 3 Haneli olmalıdır';
-$_['error_cc_expire_date'] = 'Kartın Kullanım Süresi dolmuş';
-$_['error_cc_number_luhn'] = 'Kart Numarası geçersiz';
-?>
+$_['error_fix']       = 'Plase fix errors is shown below:';
+$_['error_cc_owner']  = 'Fill Card Holder';
+$_['error_cc_number'] = 'Card number length is not correct';
+$_['error_cc_cvv2']   = 'Secure Code not valid';
+$_['error_cc_expire_date'] = 'Card Expired';
+$_['error_cc_number_luhn'] = 'Card Number is not valid';

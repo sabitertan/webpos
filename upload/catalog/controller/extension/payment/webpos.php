@@ -108,7 +108,7 @@ class ControllerExtensionPaymentWebpos extends Controller {
 			return $order_total;
 	}
 	public function instalments() {
-		$this->load->language('payment/webpos');
+		$this->load->language('extension/payment/webpos');
 		$data['text_instalments']=$this->language->get('text_instalments');
 		$data['text_instalment']=$this->language->get('text_instalment');
 		$data['text_no_instalment']=$this->language->get('text_no_instalment');
@@ -171,7 +171,7 @@ class ControllerExtensionPaymentWebpos extends Controller {
 	public function send() {
 
 		$this->load->model('checkout/order');
-		$this->load->language('payment/webpos');
+		$this->load->language('extension/payment/webpos');
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
 		$banks=$this->config->get('payment_webpos_banks_info');
 		$bank_id=$this->session->data['webpos_bank_id'];
@@ -258,7 +258,7 @@ class ControllerExtensionPaymentWebpos extends Controller {
 		$this->response->setOutput(json_encode($json));
 	}
 	public function callback(){
-		$this->load->language('payment/webpos');
+		$this->load->language('extension/payment/webpos');
 
 		$data['title'] = sprintf($this->language->get('heading_title'), $this->config->get('config_name'));
 
@@ -367,7 +367,7 @@ class ControllerExtensionPaymentWebpos extends Controller {
 		return $order_data;
 	}
 	protected function validate() {
-		$this->load->language('payment/webpos');
+		$this->load->language('extension/payment/webpos');
 		$webpos_error=array();
 		if (utf8_strlen(trim($this->request->post['cc_owner'])) < 1) {
 			$webpos_error['cc_owner'] = $this->language->get('error_cc_owner');
